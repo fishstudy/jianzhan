@@ -1,0 +1,160 @@
+<?php
+// +----------------------------------------------------------------------
+// | 贝云cms内容管理系统 [ 简单 高效 卓越 ]
+// +----------------------------------------------------------------------
+// | Copyright (c) 2017 http://www.bycms.cn All rights reserved.
+// +----------------------------------------------------------------------
+// | 版权申明：贝云cms内容管理系统不是一个自由软件，是贝云网络官方推出的商业源码，严禁在未经许可的情况下
+// | 拷贝、复制、传播、使用贝云cms内容管理系统的任意代码，如有违反，请立即删除，否则您将面临承担相应
+// | 法律责任的风险。如果需要取得官方授权，请联系官方http://www.bycms.cn
+// +----------------------------------------------------------------------
+namespace app\index\model;
+use think\Model;
+use think\Db;
+/**
+ * 分类模型
+ */
+class Category extends Model{
+    /**
+    * 位置，category 模型
+     * 获取分类树，指定分类则返回指定分类极其子分类，不指定则返回所有分类树
+     * @param  integer $id    分类ID，传入的分类主键id
+     * @param  boolean $field 查询字段,查询所有
+     * @return array，返回当前分类及其子分类数据表所有数据，分类树，多维数组
+     * @用途供makeTree函数调用
+     */
+    public function getTree($id=0,$model_id = 0, $field = true){
+        /* 获取当前分类信息 */
+        if($id){
+            $info = $this->info($id);
+            $id   = $info['id'];
+        }
+
+        /* 获取所有商品分类 */
+		$map['status']=1;
+		$map['type']=0;
+		$map['model_id']=$model_id;
+        $list =Db::name('category')->field($field)->where($map)->order('sort desc')->select();
+        $list = list_to_tree($list, $pk = 'id', $pid = 'pid', $child = '_', $root = $id);
+        
+        /* 获取返回数据 */
+        if(isset($info)){ //指定分类则返回当前分类极其子分类
+            $info['_'] = $list;
+        } else { //否则返回所有分类
+            $info = $list;
+        }
+
+        return $info;
+    }
+	 /**
+     * 位置，category 模型
+     * 构造数据
+     * @return array，返回当前分类及其子分类数据表所有数据，分类树，多维数组
+     */
+   public function makeTree($model_id){
+        $category =$this->getTree (0,$model_id);
+        foreach ( $category as $k => $v ) {
+			$cid=getChild($v["id"]);;
+			$arr=array();
+			array_push($cid,$v['id']);
+			array_push($arr,$v['id']);
+             	/**子分类**/
+			$category [$k] ['child']= array ();    
+			$condition['pid'] = array('in',$arr);
+			$category [$k] ['child']= Db::name('category')->where($condition)->limit(10)->order("id desc")->select(); 
+			/**分类文章**/
+			$category [$k] ['doc'] = array ( );
+			$map['category_id']=array("in",$cid);
+			$map['model_id']=$model_id;
+			$category [$k]['item'] =Db::name('document')->where($map)->order("id desc")->limit(5)->select();
+			
+        }
+        return $category;
+
+  }
+
+
+    /**
+     * 获取指定分类子分类ID
+     * @param  string $cate 分类ID
+     * @return string       id列表
+     */
+    public function getChildrenId($id){
+      
+	    $cid=getChild($id);//	dump($catelist);
+		if($cid){
+			krsort($cid);
+		}
+		array_push($cid,$id);
+		return $cid;
+    }
+	
+    /**
+     * 获取指定分类父分类ID
+     * @param  string $cate 分类ID
+     * @return string       id列表
+     */
+	 public function getParentId($id){
+      
+	    $cid=getParent($id);//	dump($catelist);
+		if($cid){
+			krsort($cid);
+		}
+		return $cid;
+    }
+	//动态获取指定分类商品
+    public function getDatalist($cateid){     
+        /**分类列表文档**/
+        $ids = $this->getChildrenId($cateid);    		
+		$map['category_id']=array("in",$ids);   
+		$map['status']=1;   
+		$list=Db::name( 'Document' )->where($map)->limit(10)->order("id desc")->select();         
+		foreach ($list as $k => $v ) {
+		   /**重组数据**/
+			$id=$v["id"];
+			$item[$id]["id"] =$id;    
+		    $item[$id]['url'] =U('Article/detail?id='.$id);
+            $item[$id]['pic'] =get_cover( $v["cover_id"], "path" );
+			$item[$id]['title'] =$v["title"];
+			$item[$id]['price'] =$v["price"];
+        }
+       return $item;
+     }
+    /**商品分类垂直菜单调用**/
+    public function getCategory(){
+		$field = 'id,name,pid,title';
+	
+		$condition['status']=1;
+		$condition['type']=0;
+		$category = $this->field($field)->order('id asc')->where($condition)->select( );
+		$list = $this->xunhuan($category);
+		return $list;
+	}
+
+
+   public function xunhuan($cate,$name = 'items',$pid = 0){
+		$arr = array( );
+		   foreach ( $cate as $key => $v ) {
+		   //判断，如果$v['pid'] == $pid的则压入数组Child
+		       if ($v['pid'] == $pid) {
+					//递归执行
+					$v[$name] = self::xunhuan($cate,$name,$v['id']);
+					$arr[] = $v;
+		       }
+		   }
+		return $arr;
+	}
+
+   public function getfooter(){     	
+		$map['ismenu']=2;
+		$map['pid']=0;
+		$map['status']=1;
+        $list=$this->where($map)->order( "id asc" )->select( );
+		   foreach( $list as $n=> $val ){
+			   $list[$n]['id']=$this->where('pid=\''.$val['id'].'\'')->select( );
+		   }
+       return $list;
+     }
+
+
+}

@@ -1,0 +1,348 @@
+{include file="public/header" /} 
+<!--banner-->
+<div class="banner">
+    <div class="w1200">
+    <div class="ck-slide">
+    <ul class="ck-slide-wrapper">
+                       {By:slide  place="1" name="vo" order="sort asc" limit="5"}
+								<li>
+									<a href="{$vo.url|get_url}"><img src="{$vo.cover_id|get_cover_path}"/></a>
+								</li>
+								{/By:slide}	
+    </ul>
+    <div class="ck-slidebox">
+    <div class="slideWrap">
+    <ul class="dot-wrap">
+		{By:slide  place="1" name="vo" order="sort desc" limit="5"}
+		<li class="{if condition="$i eq 1"}current{/if}"><em>{$i}</em></li>
+		{/By:slide}	
+    </ul>
+    </div>
+    </div>
+    </div>
+	<script>
+        $('.ck-slide').ckSlide({
+            autoPlay: true
+        });
+    </script>
+    </div>
+</div>
+<div class="gun_box">
+     <div class="wrap">
+     <div class="scrollbox">
+		<div class="scroltit"><small id="but_up"><img src="__IMG__/top.png"></small><small id="but_down"><img src="__IMG__/down.png"></small></div>
+
+
+		<div id="scrollDiv">
+            <h1>重要通知</h1>
+			<ul>
+			{By:cate  cate_id='15' order="id desc" limit="6"  name="vo"}
+          
+
+            <li><a href="{:url('article/detail?id='.$vo['id'])}"><em>{$vo.create_time|date="Y-m-d",###}</em>· {$vo.title}...</a></li>
+           
+			{/By:cate}
+			</ul>
+		</div>
+	 </div>
+
+     </div>
+</div>
+<!--main-->
+<div class="main">
+     <div class="w1200">
+          <div class="section">
+               <div class="step">
+                    <div class="fl left">
+                    <!-- 代码 begin -->
+                    <div class="pro-switch">
+                    <div class="slider">
+                        <div class="flexslider">
+                            <ul class="slides">
+                           
+							{By:slide  place="2" name="vo" order="sort asc" limit="5"}
+								<li>
+									<div class="img"><a href="{$vo.url|get_url}"><img src="{$vo.cover_id|get_cover_path}"/></a>
+									</div>
+								</li>
+								{/By:slide}	
+                            </ul>
+                        </div>
+                    </div>
+                    <script defer src="__JS__/slider.js"></script> 
+                    <script type="text/javascript">
+                    $(function(){
+                      $('.flexslider').flexslider({
+                        animation: "slide",
+                        start: function(slider){
+                          $('body').removeClass('loading');
+                        }
+                      });
+                    });
+                  </script>
+                  </div>
+                    <!-- 代码 end -->
+                    </div>
+                    <div class="fl center">
+                         <div class="tab_box">
+                              <div class="tab_tit">
+                              <ul>
+							  {volist name="list" id="vo" key="k"}
+                                <li><a href="{:url('article/lists?id='.$vo['id'])}" {if condition="$k eq 1"} class="cur"
+		                         {/if}>{$vo.title}</a>
+								</li>
+							  {/volist}
+                              </ul>
+                              <div class="clear"></div>
+                              </div>
+                              <div class="content">
+							   {volist name="list" id="vo" key="k"}
+                                  <div class="team" {if condition="$k eq 1"}style="display:block"
+		                         {/if}>
+                                      
+		                              <div class="top_div">
+                                      {volist name="vo['data']" id="vo1" offset="0" length="1"} <h2><a href="{:url('article/detail?id='.$vo['id'])}">{$vo1.title}{$k}</a></h2>
+                                       <p><a href="{:url('article/detail?id='.$vo['id'])}">{$vo1.description}...</a></p>
+									    {/volist}
+                                       </div>
+									  
+                                       <div class="down_div">
+                                       <ul>  {volist name="vo['data']" id="vo1" offset="1" length="4"}
+                                       <li><a href="{:url('article/detail?id='.$vo['id'])}"><em>{$vo1.create_time|date="m-d",###}</em>· {$vo1.title}</a></li>
+                                         {/volist}
+                                       </ul>
+                                       </div>
+									   
+                                  </div>
+                                   {/volist}
+                              </div>
+                         </div>
+                    </div>
+                    <div class="fr right">
+                         <div class="talk">
+                         <h3>招&nbsp;&nbsp;&nbsp;&nbsp;生&nbsp;&nbsp;&nbsp;&nbsp;咨&nbsp;&nbsp;&nbsp;&nbsp;询</h3>
+                         <div class="onlink">
+                         <ul>
+						 {volist name="teacher" id="vo"}
+                         <li><a href="http://wpa.qq.com/msgrd?v=3&uin={$vo.value}&site=qq&menu=no" target="_blank">{$vo.title}</a></li>
+                          {/volist}
+                         </ul>
+                         <div class="clear"></div>
+                         </div>
+                         <div class="down">
+                              <div class="fl ys">
+                              <a href="{:url('index/online')}">
+                              <span>
+                              <strong>在线报名</strong>
+                              <em>Registration</em>
+                              </span>
+                              </a>
+                              </div>
+                              <div class="fr ys2">
+                              <span>
+                              <strong>联系电话</strong>
+                              <em>{:C('PHONE')}</em>
+                              </span>
+                              </div>
+                              <div class="clear"></div>
+                         </div>
+                         </div>
+                    </div>
+                    <div class="clear"></div>
+               </div>
+          </div>
+          <div class="section">
+               <div class="step2">
+               <div class="title"><h4>推荐专业</h4><em>挑战高端专业，做高级工程师</em></div>
+               <div class="list_box">
+               <ul>
+               <li><a href="{:url('article/detail?id=8')}"><span><img src="__IMG__/main_35.png" width="79" height="80" /></span><h5>
+                   {$profession[0]['title']}</h5><em>{$profession[0]['description']}</em></a></li>
+               <li><a href="{:url('article/detail?id=9')}"><span><img src="__IMG__/main_37.png" width="79" height="80" /></span><h5>{$profession[1]['title']}</h5><em>{$profession[1]['description']}</em></a></li>
+               <li><a href="{:url('article/detail?id=10')}"><span><img src="__IMG__/main_39.png" width="79" height="80" /></span><h5>{$profession[2]['title']}</h5><em>{$profession[2]['description']}</em></a></li>
+               <li><a href="{:url('article/detail?id=11')}"><span><img src="__IMG__/main_41.png" width="79" height="80" /></span><h5>{$profession[3]['title']}</h5><em>{$profession[3]['description']}</em></a></li>
+                   <li><a href="{:url('article/detail?id=12')}"><span><img src="__IMG__/main_44.png" width="79" height="80" /></span><h5>{$profession[4]['title']}</h5><em>{$profession[4]['description']}</em></a></li>
+               </ul>
+               <div class="clear"></div>
+               </div>
+               </div>
+          </div>
+          <div class="section">
+               <div class="step3"><a href="#"><img src="__IMG__/index_51.jpg" width="1200" height="100" /></a></div>
+          </div>
+          <div class="section">
+               <div class="step4">
+                    <div class="fl left2">
+                    <div class="list">
+                    <ul>
+                        <li><a href="{:url('article/detail?id=25')}"><i class="img1"></i><p>志愿填报</p><b><img src="__IMG__/border.png" /></b></a></li>
+                        <li><a href="{:url('article/detail?id=26')}"><i class="img2"></i><p>录取规则</p><b><img src="__IMG__/border.png" /></b></a></li>
+                        <li><a href="{:url('article/lists?id=4')}"><i class="img3"></i><p>教学管理</p><b><img src="__IMG__/border.png" /></b></a></li>
+                        <li><a href="{:url('article/lists?id=6')}"><i class="img4"></i><p>学工管理</p><b><img src="__IMG__/border.png" /></b></a></li>
+                        <li><a href="{:url('article/lists?id=16')}"><i class="img5"></i><p>行业快讯</p><b><img src="__IMG__/border.png" /></b></a></li>
+                        <li><a href="{:url('article/detail?id=27')}"><i class="img6"></i><p>奖助学金</p><b><img src="__IMG__/border.png" /></b></a></li>
+                        <li><a href="{:url('article/detail?id=28')}"><i class="img7"></i><p>就业管理</p><b><img src="__IMG__/border.png" /></b></a></li>
+                        <li><a href="{:url('article/detail?id=29')}"><i class="img8"></i><p>报备查询</p><b><img src="__IMG__/border.png" /></b></a></li>
+                    </ul>
+                    <div class="clear"></div>
+                    </div>
+                    <h6><a href="#"><img src="__IMG__/index_67.jpg" width="230" height="80" /></a></h6>
+                    </div>
+                    <div class="fl center2">
+                    <div class="list2">
+                         <div class="box2">
+                         <h2>教学成果</h2>
+                         <div class="top_div">
+                         {volist name="data1" id="vo1" offset="0" length="1"}
+						<h3><a href="{:url('article/detail?id='.$vo1['id'])}">{$vo1.title}</a></h3>
+                         <p><a href="{:url('article/detail?id='.$vo1['id'])}">{$vo1.description|default=''}...</a></p>
+						 {/volist}
+                         </div>
+                         <div class="down_div">
+                         <ul class="fl"> 
+						 {volist name="data1" id="vo1" offset="1" length="3"}
+                         <li><a href="{:url('article/detail?id='.$vo1['id'])}"><em>{$vo1.create_time|date="m-d",###}</em>· {$vo1.title}</a></li>
+                         {/volist}
+                         </ul>
+                         <ul class="fr"> 
+						 {volist name="data1" id="vo1" offset="4" length="3"}
+                          <li><a href="{:url('article/detail?id='.$vo['id'])}"><em>{$vo1.create_time|date="m-d",###}</em>· {$vo1.title}</a></li>
+                         {/volist}
+                        
+						 </ul>
+                         <div class="clear"></div>
+                         </div>
+                         </div>
+                         <div class="box">
+                         <h2>招生问答</h2>
+                         <div class="top_div">
+                          {volist name="data2" id="vo1" offset="0" length="1"}
+						 <h3><a href="{:url('article/detail?id='.$vo1['id'])}">{$vo1.title}</a></h3>
+                         <p><a href="{:url('article/detail?id='.$vo1['id'])}">{$vo1.description|default=''}...</a></p>
+						 {/volist}
+                         </div>
+                         <div class="down_div">
+                         <ul class="fl"> 
+						 {volist name="data2" id="vo1" offset="1" length="3"}
+                         <li><a href="{:url('article/detail?id='.$vo1['id'])}"><em>{$vo1.create_time|date="m-d",###}</em>· {$vo1.title}</a></li>
+                         {/volist}
+                         </ul>
+                         <ul class="fr"> 
+						 {volist name="data2" id="vo1" offset="4" length="3"}
+                          <li><a href="{:url('article/detail?id='.$vo1['id'])}"><em>{$vo1.create_time|date="m-d",###}</em>· {$vo1.title}</a></li>
+                         {/volist}
+                         </ul>
+                         <div class="clear"></div>
+                         </div>
+                         </div>
+                    </div>
+                    </div>
+                    <div class="fr right2">
+                        <div><h4>就业明星<em>平均薪资在10k以上</em></h4></div>
+                    <div style="height: 400px;">
+                    <div class="star" id="star" style="position: relative;height: 360px;overflow: hidden;">
+                    <ul id="starul">
+					{volist name="data3" id="vo" offset="0" length="8" key="k"}
+                    <li if condition="$k eq 1"}class="last"{/if}>
+                    <div class="item">
+                         <span class="fl pic"><a href="{:url('article/detail?id='.$vo['id'])}"><img src="{$vo.cover_id|get_cover_path}" width="60" height="60" /></a></span>
+                         <div class="fr wz">
+                         <h5><a href="#">{$vo.title}</a></h5>
+                         <em>高级软件工程师专业</em>
+                         <p>{$vo.title}</p>
+                         </div>
+                         <div class="clear"></div>
+                    </div>
+                    </li>
+                    {/volist}
+                    </ul>
+                    </div>
+                    </div>
+                    </div>
+                    <div class="clear"></div>
+               </div>
+          </div>
+          <div class="section">
+               <div class="step5">
+                    <div class="title"><h4>校园风采</h4><em>莘莘学子勤奋攻读、矢志成才的理想园地</em></div>
+                    <div class="img_show">
+					    {volist name="data4" id="vo" offset="0" length="1" key="k"}
+                         <div class="fl left3"><a href="{:url('article/detail?id='.$vo['id'])}"><div class="tp"><img src="{$vo.cover_id|get_cover_path}" width="400" height="246" /><p class="info">{$vo.title}</p></div></a></div>
+						 {/volist}
+                         <div class="fr right3">
+                         <ul>
+						 {volist name="data4" id="vo" offset="1" length="8" key="k"}
+                         <li><a href="{:url('article/detail?id='.$vo['id'])}"><div class="tp"><img src="{$vo.cover_id|get_cover_path}" width="190" height="118" /><p class="info">{$vo.title}</p></div></a></li>
+                        {/volist}
+                         </ul>
+                         <div class="clear"></div>
+                         </div>
+                         <div class="clear"></div>
+                    </div>
+               </div>
+          </div>
+     </div>
+</div>
+<div class="link">
+     <div class="wrap">
+          <div class="ship">
+          <ul>
+		    {By:link name="vo" order="id desc" limit="10"}
+			 <li> <a href="{$vo.url|get_url}"><img src="{$vo.cover_id|get_cover_path}" width="148" height="48" /></a>
+            </li>
+			{/By:link}
+
+          </ul>
+          <div class="clear"></div>
+       </div>
+     </div>
+</div>
+<script>
+    $(function () {
+        var num=$("#starul").find("li").length;
+        if (num>1) {
+            setInterval(function(){
+                $('#starul').animate({
+                    marginTop:"-56px"
+                },500,function(){
+                    $(this).css({marginTop : "0"}).find("li:first").appendTo(this);
+                });
+            }, 5000);
+        }
+    })
+   /* window.onload = function () {
+        var oDiv = document.getElementById('star');
+        var oUl = oDiv.getElementsByTagName('ul')[0];
+        var aLi = oUl.getElementsByTagName('li');
+        var timer = null;
+        var iSpeed = -5;
+        oUl.innerHTML += oUl.innerHTML;
+        oUl.style.height = aLi.length * aLi[0].offsetHeight + 'px';
+        timer =setTimeout(fnMove, 100);
+        oDiv.onmouseover = function () {
+            clearInterval(timer);
+        }
+        oDiv.onmouseout = function () {
+            clearInterval(timer);
+            timer = setInterval(fnMove, 100);
+        }
+        function fnMove() {
+            if (oUl.offsetTop < -oUl.offsetHeight /10) {
+                oUl.style.top = 0;
+            }
+            oUl.style.top = oUl.offsetTop + iSpeed + 'px';
+            if ((oUl.offsetTop % 50) == 0) {
+                clearInterval(timer);
+                timer =setTimeout(fnMove, 2000);
+
+            } else {
+                clearInterval(timer);
+                timer = setTimeout(fnMove, 100);
+            }
+        }
+    }*/
+</script>
+<!--footer-->
+	{include file="public/footer" /}
+</body>
+</html>

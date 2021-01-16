@@ -1,0 +1,259 @@
+{include file="public/header" /} 
+	<!--banner-->
+<div class="banner">
+    <div class="w1200">
+    <div class="ck-slide">
+    <ul class="ck-slide-wrapper">
+                       {By:slide  place="1" name="vo" order="sort asc" limit="5"}
+								<li>
+									<a href="{$vo.url|get_url}"><img src="{$vo.cover_id|get_cover_path}"/></a>
+								</li>
+								{/By:slide}	
+    </ul>
+    <div class="ck-slidebox">
+    <div class="slideWrap">
+    <ul class="dot-wrap">
+		{By:slide  place="1" name="vo" order="sort desc" limit="5"}
+		<li class="{if condition="$i eq 1"}current{/if}"><em>{$i}</em></li>
+		{/By:slide}	
+    </ul>
+    </div>
+    </div>
+    </div>
+	<script>
+        $('.ck-slide').ckSlide({
+            autoPlay: true
+        });
+    </script>
+    </div>
+</div>
+<!--main-->
+<div class="main">
+     <div class="w1200">
+          <div class="section">
+               <div class="home">你的当前位置：<a href="#">首页</a> > <em>在线报名</em></div>
+               <div class="contain">
+                    <div class="fl leftside">
+                    <div class="nav">
+                     <h1 class="tit">在线报名<em>ONLINE REGISTRAATION</em></h1>
+                     <div class="nav_list">
+                     <ul>
+                     <li><a href="#">在线报名</a></li>
+                     </ul>
+                     </div>
+                    <div class="talk">
+                         <h3>招&nbsp;&nbsp;&nbsp;&nbsp;生&nbsp;&nbsp;&nbsp;&nbsp;咨&nbsp;&nbsp;&nbsp;&nbsp;询</h3>
+                         <div class="onlink">
+                         <ul>
+                           {volist name="teacher" id="vo"}
+                         <li><a href="http://wpa.qq.com/msgrd?v=3&uin={$vo.value}&site=qq&menu=yes" target="_blank">{$vo.title}</a></li>
+                          {/volist}
+                         </ul>
+                         <div class="clear"></div>
+                         </div>
+                         <div class="down">
+                              <div class="ys">
+                              <a href="#">
+                              <span>
+                              <strong>在线报名</strong>
+                              <em>Registration</em>
+                              </span>
+                              </a>
+                              </div>
+                              <div class="ys2">
+                              <span>
+                              <strong>联系电话</strong>
+                              <em>{:C("PHONE")}</em>
+                              </span>
+                              </div>
+                              <div class="clear"></div>
+                         </div>
+                         </div>
+                    <div class="list">
+                    <ul>
+                    <li><a href="{:url('article/detail?id=26')}"><i class="img2"></i><p>录取规则</p><b><img src="__IMG__/border.png" /></b></a></li>
+                    <li><a href="{:url('article/lists?id=4')}"><i class="img3"></i><p>教学管理</p><b><img src="__IMG__/border.png" /></b></a></li>
+                    <li><a href="{:url('article/lists?id=16')}"><i class="img5"></i><p>行业快讯</p><b><img src="__IMG__/border.png" /></b></a></li>
+                    <li><a href="{:url('article/detail?id=28')}"><i class="img7"></i><p>就业管理</p><b><img src="__IMG__/border.png" /></b></a></li>
+                    </ul>
+                    <div class="clear"></div>
+                    </div>
+                    </div>
+                    </div>
+                    <div class="fr rightside">
+                    <div class="zx_test">
+                    <form action="{:url('online/add')}">
+                    <table border="0" cellpadding="0" cellspacing="0">
+                      <tr>
+                        <td class="name">姓名：</td>
+                        <td><input name="username" type="text" /><span>*</span></td>
+                      </tr>
+                      <tr>
+                        <td class="name">性别：</td>
+                        <td>
+                        <input checked="checked" value="1" class="radio" name="sex" id="xb1" type="radio"><label for="xb1"> &nbsp;男</label>
+                        <input class="radio" value="2" name="sex" id="xb2" type="radio"><label for="xb2"> &nbsp;女</label>
+                        <span>*</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="name">家庭住址：</td>
+                        <td>
+                            <select id="province" name="province" >
+                                <option value="">选择省份</option>
+                                  {volist name="list" id="vo" }
+                                    <option  value="{$vo.id}" >{$vo.title}</option>
+                                  {/volist}
+                             </select>
+                             <select id="city" name="city">
+                                 <option value="">选择城市</option>
+                             </select>
+                            <select id="area" name="area">
+                                <option value="">选择区县</option>
+                            </select>
+                            <span>*</span>
+                      </td>
+                      </tr>
+                        <tr>
+                            <td class="name">详细地址：</td>
+                            <td><input name="detail" type="text" /><span>*</span></td>
+                        </tr>
+                      <tr>
+                        <td class="name">专业方向：</td>
+                        <td>
+                        <select name="profession">
+                            <option value="">请选择</option>
+                             {volist name="prolist" id="vo" }
+                            <option  value="{$vo.id}" >{$vo.title}</option>
+                            {/volist}
+                        </select>
+
+                        </select>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="name">身份证号：</td>
+                        <td><input name="idcard" type="text" /><span>*</span></td>
+                      </tr>
+                      <tr>
+                        <td class="name">最高学历：</td>
+                        <td>
+                                <select name="education">
+                                <option value="">请选择</option>
+                                <option value="1">研究生</option>
+                                <option value="2">本科</option>
+                                <option value="3">大专</option>
+                                <option value="4">高中</option>
+                                <option value="5">初中</option>
+                                <option value="6">小学</option>
+                            </select><span>*</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="name">手机号码：</td>
+                        <td><input name="mobile" type="text"  onkeyup="this.value=this.value.replace(/\D/g,'')"/><span>*</span></td>
+                      </tr>
+                        <tr>
+                            <td class="name">微信号：</td>
+                            <td><input name="weixin" type="text" /></td>
+                        </tr>
+                      <tr>
+                        <td class="name">QQ号码：</td>
+                        <td><input name="qq" type="text" /></td>
+                      </tr>
+                      <tr>
+                        <td class="name">推荐人：</td>
+                        <td><input name="referee" type="text" /></td>
+                      </tr>
+                      <tr>
+                        <td class="name">推荐人手机：</td>
+                        <td><input name="referee_mobile" type="text"  onkeyup="this.value=this.value.replace(/\D/g,'')"/></td>
+                      </tr>
+                      <tr>
+                         <td class="name">其他说明：</td>
+                         <td><input name="others" type="text" /></td>
+                      </tr>
+                      <tr>
+                        <td class="name">&nbsp;</td>
+                        <td><input name="" type="button" class="yes btn_submit" value="确认提交"/></td>
+                      </tr>
+                    </table>
+                    </form>
+                    <div class="line"></div>
+                    <div class="atention">
+                    <br/>
+                    <h5>招生电话：</h5>
+                    <p>{:C('PHONE')}</p>
+                    </div>
+                    </div>
+                    </div>
+                    <div class="clear"></div>
+               </div>
+          </div>
+     </div>
+</div>	
+<script type="text/javascript" src="__JS__/jquery.min.js" ></script>
+<script type="text/javascript">
+    //选择省改变对应的市
+    $('#province').change(function(){
+        if(this.value==-1){
+            return;
+        }
+        $.post('{:url("area/change")}',{pid:this.value},
+            function(data,textStatus){
+                if(data){
+                    $('#city').empty();//清空原有的数据
+                    $("<option value='-1'>选择城市</option>").appendTo("#city");
+                    $.each(data, function(i,n){
+                        $("<option value='"+n.id+"'>"+n.title+"</option>").appendTo("#city");
+
+                    });
+
+                }else{
+                    alert('没有子级了!');
+                }
+            },'json');
+    });
+    //选择市改变对应的区或县
+    $('#city').change(function(){
+        if(this.value==-1){
+            return;
+        }
+        $.post('{:url("area/change")}',{pid:this.value},
+            function(data,textStatus){
+                if(data){
+
+                    $('#area').empty();//清空原有的数据
+                    $("<option value='-1'>选择区域</option>").appendTo("#area");
+                    $.each(data, function(i,n){
+                        $("<option value='"+n.id+"'>"+n.title+"</option>").appendTo("#area");
+                        //$("#ltwo").append('<option value="'+n.region_id+'">'+n.region_name+'</option>');
+                    });
+                    $('#ltwo').show();
+                }else{
+                    alert('没有子级了!');
+                }
+            },'json');
+    });
+
+		
+    $(".btn_submit").click(function(){
+        var self = $("form");
+        $.post(self.attr("action"),self.serialize(),success,"json");
+        return false;
+     });
+
+    function success(data){
+        if(data.code){
+            alert(data.msg);
+        } else {
+            alert(data.msg);
+            //刷新验证码
+            //$(".reloadverify").click();
+        }
+    }
+	</script>	
+<!--footer-->
+	{include file="public/footer" /}
+	</body>
+</html>

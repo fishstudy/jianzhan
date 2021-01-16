@@ -1,0 +1,120 @@
+{include file="public/header" /} 
+	<!--banner-->
+<div class="banner">
+    <div class="w1200">
+    <div class="ck-slide">
+     <ul class="ck-slide-wrapper">
+                       {By:slide  place="1" name="vo" order="sort asc" limit="5"}
+								<li>
+									<a href="{$vo.url|get_url}"><img src="{$vo.cover_id|get_cover_path}"/></a>
+								</li>
+								{/By:slide}	
+    </ul>
+    <div class="ck-slidebox">
+    <div class="slideWrap">
+    <ul class="dot-wrap">
+		{By:slide  place="1" name="vo" order="sort desc" limit="5"}
+		<li class="{if condition="$i eq 1"}current{/if}"><em>{$i}</em></li>
+		{/By:slide}	
+    </ul>
+    </div>
+    </div>
+    </div>
+	<script>
+        $('.ck-slide').ckSlide({
+            autoPlay: true
+        });
+    </script>
+    </div>
+</div>
+<!--main-->
+<div class="main">
+     <div class="w1200">
+          <div class="section">
+               <div class="home">你的当前位置：<a href="{:url('index/index')}">首页</a> > <em>{$info.title}</em></div>
+               <div class="contain">
+                    <div class="fl leftside">
+                    <div class="nav">
+                     <h1 class="tit">{$info.title}</h1>
+                     <div class="nav_list">
+                     <ul>
+                    	 {foreach $ids as $vo}  
+			                <li><a href="{:url('article/lists?id='.$vo)}">{$vo|get_category="title"}</a></li>
+		                 {/foreach}
+						   <li><a href="{:url('article/lists?id='.$info['id'])}">{$info.title}</a></li>
+                     </ul>
+                     </div>
+                     <div class="talk">
+                         <h3>招&nbsp;&nbsp;&nbsp;&nbsp;生&nbsp;&nbsp;&nbsp;&nbsp;咨&nbsp;&nbsp;&nbsp;&nbsp;询</h3>
+                         <div class="onlink">
+                         <ul>
+                         {volist name="teacher" id="vo"}
+                         <li><a href="http://wpa.qq.com/msgrd?v=3&uin={$vo.value}&site=qq&menu=yes" target="_blank">{$vo.title}</a></li>
+                          {/volist}
+                         </ul>
+                         <div class="clear"></div>
+                         </div>
+                         <div class="down">
+                              <div class="ys">
+                              <a href="{:url('index/online')}">
+                              <span>
+                              <strong>在线报名</strong>
+                              <em>Registration</em>
+                              </span>
+                              </a>
+                              </div>
+                              <div class="ys2">
+                              <span>
+                              <strong>联系电话</strong>
+                              <em>{:C("PHONE")}</em>
+                              </span>
+                              </div>
+                              <div class="clear"></div>
+                         </div>
+                         </div>
+                    <div class="list">
+                    <ul>
+                     <li><a href="{:url('article/detail?id=25')}"><i class="img1"></i><p>志愿填报</p><b><img src="__IMG__/border.png" /></b></a></li>
+                    <li><a href="{:url('article/detail?id=26')}"><i class="img2"></i><p>录取规则</p><b><img src="__IMG__/border.png" /></b></a></li>
+                    <li><a href="{:url('article/lists?id=4')}"><i class="img3"></i><p>教学管理</p><b><img src="__IMG__/border.png" /></b></a></li>
+                    <li><a href="{:url('article/lists?id=6')}"><i class="img4"></i><p>学工管理</p><b><img src="__IMG__/border.png" /></b></a></li>
+                    <li><a href="{:url('article/lists?id=16')}"><i class="img5"></i><p>行业快讯</p><b><img src="__IMG__/border.png" /></b></a></li>
+                    <li><a href="{:url('article/detail?id=27')}"><i class="img6"></i><p>奖助学金</p><b><img src="__IMG__/border.png" /></b></a></li>
+                    <li><a href="{:url('article/detail?id=28')}"><i class="img7"></i><p>就业管理</p><b><img src="__IMG__/border.png" /></b></a></li>
+                    <li><a href="{:url('article/detail?id=29')}"><i class="img8"></i><p>报备查询</p><b><img src="__IMG__/border.png" /></b></a></li>
+                    </ul>
+                    <div class="clear"></div>
+                    </div>
+                    </div>
+                    </div>
+                    <div class="fr rightside">
+					<div class="box">
+                    <ul>
+					
+				      {volist name="res.list" id="vo"} 
+					  <li>
+                    <div class="list">
+                         <span class="fl img"><a href="{:url('article/detail?id='.$vo['id'])}"><img src="{$vo.cover_id|get_cover_path}" width="320" height="180"></a></span>
+                         <div class="fr tit">
+                         <h5><a href="{:url('article/detail?id='.$vo['id'])}">{$vo.title}</a></h5>
+                         <p>{$vo.description}...</p>
+                         <span class="bottom"><b></b><a href="{:url('article/detail?id='.$vo['id'])}">+查看详细</a></span>
+                         </div>
+                         <div class="clear"></div>
+                    </div>
+                    </li>
+					  {/volist}                
+                    </ul>
+					 {$res.page}
+                    </div>
+                    
+                    </div>
+                    <div class="clear"></div>
+               </div>
+          </div>
+     </div>
+</div>
+<!--footer-->
+{include file="public/footer" /}
+</body>
+</html>
