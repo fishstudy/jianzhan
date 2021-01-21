@@ -1,12 +1,8 @@
 <?php
 // +----------------------------------------------------------------------
-// | 贝云cms内容管理系统 [ 简单 高效 卓越 ]
 // +----------------------------------------------------------------------
-// | Copyright (c) 2017 http://www.bycms.cn All rights reserved.
+// | Copyright (c) 2021 fish_study
 // +----------------------------------------------------------------------
-// | 版权申明：贝云cms内容管理系统不是一个自由软件，是贝云网络官方推出的商业源码，严禁在未经许可的情况下
-// | 拷贝、复制、传播、使用贝云cms内容管理系统的任意代码，如有违反，请立即删除，否则您将面临承担相应
-// | 法律责任的风险。如果需要取得官方授权，请联系官方http://www.bycms.cn
 // +----------------------------------------------------------------------
 namespace app\index\controller;
 use think\Controller;
@@ -14,7 +10,7 @@ use think\Db;
 class Index extends Base{
     
 	public function index(){     
-	   
+	   echo "维护中，敬请期待！！！";
      
         unset($map);
 	    //三栏新闻
@@ -26,29 +22,32 @@ class Index extends Base{
 		//教学成果
 		unset($map);
 		$map["category_id"]=9;
+		$map['status'] = 1;
 		$data1=lists("document",$map,7,"position desc,id desc");
         $this->assign ( 'data1', $data1);
         //招生问答
 		unset($map);
 		$map["category_id"]=8;
+        $map['status'] = 1;
 		$data2=lists("document",$map,7,"position desc,id desc");
         $this->assign ( 'data2', $data2);
         //就业明星
 		unset($map);
 		$map["category_id"]=7;
+        $map['status'] = 1;
 		$data3=lists("document",$map,10,"position desc,id desc",'title,id,uid,cover_id');
-//		echo '<pre>';
-//		print_r($data3);
-//		die();
+
         $this->assign ( 'data3', $data3);
 		//校园风采
 		unset($map);
 		$map["category_id"]=11;
+        $map['status'] = 1;
 		$data4=lists("document",$map,9,"position desc,id desc");
         $this->assign ( 'data4', $data4);
         //专业
         unset($map);
         $map["category_id"]=3;
+        $map['status'] = 1;
         $data5=lists("document",$map,5,"position desc",'id,title,position,description');
         $this->assign ( 'profession', $data5);
 		//统计

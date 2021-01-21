@@ -16,20 +16,24 @@
 						    <div class="input_title">名称<span>(名称)</span></div>
 							<input type="text" name="title" class="input_box" value="{$info.title|default=""}"/>
 							<div class="input_title">链接<span>(链接)</span></div>
-						  <input type="text" id="user-weibo" class="input_box" name="url" value="{$info.url|default=""}">
+						  <input type="text" id="url" class="input_box" name="url" value="{$info.url|default=""}">
 							<div class="input_title">位置<span>(幻灯片位置)</span></div>
-						  <input type="text" id="user-weibo" class="input_box" name="place" value="{$info.place|default=""}">
+							 <select id="place" class="input_box" name="place">
+								 <option value="">请选择</option>
+								 <option value="1" {$info.place==1?"selected":""}>首页大图轮播</option>
+								 <option value="2" {$info.place==2?"selected":""}>首页小图轮播</option>
+							 </select>
 				      	<div class="upload_div">
 								<div class="input_title">图片<span>(图片名称)</span></div>
 								<div class="upload_btn_group">
 									<div class="upload_btn">上传图片</div>
-									<input type="file" class="upload_file" id="cover_id" />
+									<input type="file" class="upload_file" id="cover_id" onchange="upload()" />
 								</div>
 								<div class="upload_imgs">
-									<input type="hidden" name="cover_id" value="{$info.cover_id|default=""}"	>
+									<input type="text" name="cover_id" value="{$info.cover_id|default=''}"	id="hiddencover_id">
 									<span class="upload_imgs_wrap cover_id">
 									  {notempty name="info['cover_id']"}
-							              <div class="upload-pre-item"> <img src="{$info.cover_id|get_cover_path}"/>
+							              <div class="upload-pre-item" id="upload-pre-item"> <img src="{$info.cover_id|get_cover_path}"/>
 						                </div>{/notempty}
 									
 									</span>
@@ -38,29 +42,29 @@
 							</div>
 					<script type="text/javascript" src="__COMMON__/uploadify/jquery.uploadify.min.js"></script>									
 					<script type="text/javascript">
-				    /* 初始化上传插件 */
-					$("#cover_id").uploadify({
-				        "height"          : 30,
-				        "swf"             : "__COMMON__/uploadify/uploadify.swf",
-				        "fileObjName"     : "download",
-				        "buttonText"      : "上传图片",
-				        "uploader"        : "{:url('File/uploadPicture',array('session_id'=>session_id()))}",
-				        "width"           : 150,
-				        'removeTimeout'	  : 10,
-				        'fileTypeExts'	  : '*.jpg; *.png; *.gif;',
-				        "onUploadSuccess" : function(file, data){
-				    	var data = $.parseJSON(data);
-				    	var src = '';
-				        if(data.status){
-				        	$("input[name='cover_id']").val(data.id);
-				        	src = data.url || data.path;
-				        	$('.cover_id').html(' <div class="upload-pre-item"><img src="' + src + '"/> </div>');
-				         } 
-				       },
-				        'onFallback' : function() {
-				            alert('未检测到兼容版本的Flash.');
-				        }
-				    });
+						/* 初始化上传插件 */
+						function upload() {
+							var form = new FormData();
+							var img_file = $("#cover_id").val();
+							var fileobj = $("#cover_id")[0].files[0];
+							var picid = $("#hiddencover_id").val();
+							form.append('name',img_file);
+							form.append('imgFile',fileobj);
+							$.ajax({
+								url: "/admin.php/uploads/upimg.html?dir=image&picid="+picid,
+								data: form,
+								dataType:'JSON',
+								type: "POST",
+								processData:false,
+								contentType:false,
+								success: function(res){
+									console.dir(res);
+									// console.log(res);
+									$("#upload-pre-item").html('<img width="60px" class="up_img" src="'+res.url+'" />');
+									$("#hiddencover_id").val(res.id);
+								}
+							})
+						}
 					
 					</script>			
 						</div>

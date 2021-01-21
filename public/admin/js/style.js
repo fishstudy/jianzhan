@@ -2,9 +2,7 @@
 				
 				bindEvent();
 			});
-			
-	}
-			}
+
 			function bindEvent(){
 				$(".p_menue").on('click',function(){
 					if($(this).parent(".menue").hasClass("down")){

@@ -7,21 +7,19 @@
 				<div class="edit_title"><i class="fa fa-{$now.font|default=''}"></i>{$meta_title|default=""}</div>
 				<div class="search">
 					<form class="search-form"  action="{:url()}" method="post">
-					  <div class="group">
-					       名称：<input type="text" name="title" class="search_ipt" value="{:input('title')}"/>
-					  
+					  <div class="group">名称：<input type="text" name="title" class="search_ipt" value="{:input('title')}"/></div>
+						<div class="group" style="margin-left:200px;">位置：<select id="place" class="input_box search_ipt" name="place">
+							 <option value="">全&nbsp;&nbsp;&nbsp;&nbsp;部</option>
+							 <option value="1" {$search_place==1?"selected":""}>首页大图轮播</option>
+							 <option value="2" {$search_place==2?"selected":""}>首页小图轮播</option>
+						</select></div>
+					  <!-- <div class="group">
+					     链接：<input type="text" name="url"  class="search_ipt" value=""/>
 					  </div>
 						  <div class="group">
-					     位置：<input type="text" name="place"  class="search_ipt" value="{:input('place')}"/>
-					  </div>
-					   <div class="group">
-					     链接：<input type="text" name="url"  class="search_ipt" value="{:input('url')}"/>
-					  </div>
-						  <div class="group">
-					     排序：<input type="text" name="sort"  class="search_ipt" value="{:input('sort')}"/>
-					  </div>
-
-					<div class="search_btn" onclick="$('.search-form').submit()">搜索</div>
+					     排序：<input type="text" name="sort"  class="search_ipt" value=""/>
+					  </div>-->
+					<div class="search_btn" onclick="$('.search-form').submit()" style="margin-left:200px;display:inline-block;overflow: hidden;">搜索</div>
 					</form>
 					</div>
 				<div class="table">
@@ -64,7 +62,7 @@
 			<td>{$vo.sort|default='0'}
 		
 			</td>
-			<td>{$vo.place|default='0'}
+			<td>{$vo.place==1?"首页大图轮播":"首页小图轮播"}
 		
 			</td>
 			<td>{eq name="vo.status" value="1"}

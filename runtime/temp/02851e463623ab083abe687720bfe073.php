@@ -1,10 +1,10 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:69:"D:\phpstudy_pro\WWW\huimin/application/admin\view\config\systems.html";i:1506941166;s:68:"D:\phpstudy_pro\WWW\huimin/application/admin\view\public\header.html";i:1506935140;s:68:"D:\phpstudy_pro\WWW\huimin/application/admin\view\public\dialog.html";i:1504823103;s:67:"D:\phpstudy_pro\WWW\huimin/application/admin\view\public\color.html";i:1506937069;s:68:"D:\phpstudy_pro\WWW\huimin/application/admin\view\public\footer.html";i:1505402999;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:69:"D:\phpstudy_pro\WWW\huimin/application/admin\view\config\systems.html";i:1610954046;s:68:"D:\phpstudy_pro\WWW\huimin/application/admin\view\public\header.html";i:1610938211;s:68:"D:\phpstudy_pro\WWW\huimin/application/admin\view\public\dialog.html";i:1504823103;s:67:"D:\phpstudy_pro\WWW\huimin/application/admin\view\public\color.html";i:1506937069;s:68:"D:\phpstudy_pro\WWW\huimin/application/admin\view\public\footer.html";i:1610936969;}*/ ?>
  <!-- 头部 -->
 	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-	<title><?php echo (isset($meta_title) && ($meta_title !== '')?$meta_title:""); ?>|贝云cms后台管理</title>
+	<title><?php echo (isset($meta_title) && ($meta_title !== '')?$meta_title:""); ?>|慧敏职业学校后台管理</title>
     	<link rel="stylesheet" href="__COMMON__/font-awesome/css/font-awesome.min.css">
 		<link rel="stylesheet" href="__CSS__/style.css" />
 
@@ -268,8 +268,7 @@ tr:hover{ background-color:#f9f9f9;}
 		
 
 
-<!-- 头部 -->  
-			<script type="text/javascript" src="__COMMON__/uploadify/jquery.uploadify.min.js"></script>	
+<!-- 头部 -->
   <script type="text/javascript" src="__COMMON__/jquery.colorpicker.js"></script>	
 			<div class="content">
 			<div class="tips_msg none"><span class="tips">保存成功</span><span class="close_tips"></span></div>
@@ -315,51 +314,20 @@ tr:hover{ background-color:#f9f9f9;}
 						   <div class="upload_div">
 								<div class="input_title"><?php echo $config['title']; if(!(empty($config['remark']) || (($config['remark'] instanceof \think\Collection || $config['remark'] instanceof \think\Paginator ) && $config['remark']->isEmpty()))): ?><span>(<?php echo $config['remark']; ?>)</span><?php endif; ?></div>
 								<div class="upload_btn_group">
-									<div class="upload_btn">上传图片</div>
-									<input type="file" class="upload_file" id="<?php echo $config['name']; ?>"/>
+
+									<input type="file" class="upload_file" id="<?php echo $config['name']; ?>" onchange="upload()"/>
 							 	</div>
 								<div class="upload_imgs h50">
-									<input type="hidden" name="config[<?php echo $config['name']; ?>]"  value="<?php echo $config['value']; ?>"	>
+									<input type="hidden" name="config[<?php echo $config['name']; ?>]"  value="<?php echo $config['value']; ?>"	id="config[<?php echo $config['name']; ?>]">
 									  <span class="upload_imgs_wrap upload-pre-img-<?php echo $config['name']; ?> ">
 							          <?php if(!(empty($config['value']) || (($config['value'] instanceof \think\Collection || $config['value'] instanceof \think\Paginator ) && $config['value']->isEmpty()))): ?>  
-									  <div class="upload-pre-item"> 
+									  <div class="upload-pre-item" id="upload-pre-item">
 									    <img src="<?php echo get_cover_path($config['value']); ?>"/>
 						                </div>
 									  <?php endif; ?>
 									</span>
 								</div>
-							</div>										
-					    <script type="text/javascript">
-
-
-
-				    /* 初始化上传插件 */
-					$("#<?php echo $config['name']; ?>").uploadify({
-				        "height"          : 30,
-				        "swf"             : "__COMMON__/uploadify/uploadify.swf",
-				        "fileObjName"     : "download",
-				        "buttonText"      : "上传图片",
-				        "uploader"        : "<?php echo url('File/uploadPicture',array('session_id'=>session_id())); ?>",
-				        "width"           : 120,
-				        'removeTimeout'	  : 1,
-				        'fileTypeExts'	  : '*.jpg; *.png; *.gif;',
-				        "onUploadSuccess" : uploadPicture<?php echo $config['name']; ?>,
-				        'onFallback' : function() {
-				            alert('未检测到兼容版本的Flash.');
-				        }
-				    });
-					function uploadPicture<?php echo $config['name']; ?>(file, data){
-				    	var data = $.parseJSON(data);
-				    	var src = '';
-				        if(data.status){
-				        	src = data.url || data.path;
-							$("input[name='config[<?php echo $config['name']; ?>]']").val(data.id);
-				        	$('.upload-pre-img-<?php echo $config['name']; ?>').html(
-				        		' <div class="upload-pre-item"><img src="' +src + '"/> </div>'
-				        	);
-				        } 
-				    }
-					</script>
+							</div>
                      <?php break; endswitch; endforeach; endif; else: echo "" ;endif; ?>	
 						</div>
 						<div class="edit_content_tab none">
@@ -377,9 +345,31 @@ tr:hover{ background-color:#f9f9f9;}
 		</div>
 		
 	
-    <script>		
-	  
-				$(".p_menue").on('click',function(){
+    <script>
+		function upload() {
+			var form = new FormData();
+			var img_file = $("#LOGO").val();
+			var fileobj = $("#LOGO")[0].files[0];
+			form.append('name',img_file);
+			form.append('imgFile',fileobj);
+			$.ajax({
+				url: "/admin.php/uploads/upimg.html?dir=image",
+				data: form,
+				dataType:'JSON',
+				type: "POST",
+				processData:false,
+				contentType:false,
+				success: function(res){
+					 console.dir(res);
+					// console.log(res);
+					$("#hidden_img").show();
+					$("#upload-pre-item").html('<img width="60px" class="up_img" src="'+res.url+'" />');
+					$("#config[LOGO]").val(res.url);
+				}
+			})
+		}
+
+		$(".p_menue").on('click',function(){
 					if($(this).parent(".menue").hasClass("down")){
 						$(this).parent(".menue").removeClass("down").addClass("up");
 						$(this).find("span").attr("class","folder_icon_on");
@@ -406,10 +396,9 @@ tr:hover{ background-color:#f9f9f9;}
 	
 <script src="__JS__/common.js"></script>
 <script>
-var html='<footer style=""><p> Powered by <a href="http://www.bycms.cn/" target="_blank">bycms V1.0</a> </p></footer>';
+var html='<footer style=""><p> 版权所有 慧敏职业学校  </p></footer>';
 
 $(".content").append(html);
-switchEvent("#switch",function(){alert("开啦")},function(){alert("关了")});
 </script>
 </body>
 </html>

@@ -1,12 +1,8 @@
 <?php
 // +----------------------------------------------------------------------
-// | 贝云cms内容管理系统 [ 简单 高效 卓越 ]
 // +----------------------------------------------------------------------
-// | Copyright (c) 2017 http://www.bycms.cn All rights reserved.
+// | Copyright (c) 2021 fish_study
 // +----------------------------------------------------------------------
-// | 版权申明：贝云cms内容管理系统不是一个自由软件，是贝云网络官方推出的商业源码，严禁在未经许可的情况下
-// | 拷贝、复制、传播、使用贝云cms内容管理系统的任意代码，如有违反，请立即删除，否则您将面临承担相应
-// | 法律责任的风险。如果需要取得官方授权，请联系官方http://www.bycms.cn
 // +----------------------------------------------------------------------
 namespace app\admin\controller;
 use think\Controller;
@@ -25,7 +21,9 @@ class Slide extends Admin{
 	    $this->assign('res', $res);
 		$this->meta_title="幻灯片管理";
 		$this->assign('meta_title', $this->meta_title);
-	    return $this->fetch(); 
+        $search_place=input('place');
+		$this->assign('search_place', $search_place);
+	    return $this->fetch();
 	}
 	
 	public function edit($id){   
@@ -39,8 +37,7 @@ class Slide extends Admin{
 			    $error=$Slide->getError()?$Slide->getError():"更新失败";
 			    $this->error($error);
 		   } 
-	  }
-	  else{
+	  } else{
 		 $map['id']=$id;
 		 $info=db("Slide")->where($map)->find();
 	     $this->assign('info', $info);
@@ -66,15 +63,14 @@ class Slide extends Admin{
 			  $error=$Slide->getError()?$Slide->getError():"新增失败";
 			  $this->error($error);
 		  } 
-	   }
-	  else{
+	   } else{
 		 cookie("__forward__",input('server.HTTP_REFERER'));
          $map["pid"]=0;
 		 $list =db('category')->where($map)->select();
 		 $this->assign('list',$list);
 		 $this->meta_title="新增幻灯片";
 		 $this->assign('meta_title', $this->meta_title);
-	     return $this->fetch("slide/edit");
+	     return $this->fetch("slide/add");
 	  }
 	}   //切换分类
     public function change($pid){
@@ -86,7 +82,7 @@ class Slide extends Admin{
 		   exit(json_encode($data));
 	   }
    }
-	public function del(){   
+	public function del(){
 	    $id=input("id");
 	    $map['id']=array("in",$id);
 		if(!$map["id"]){

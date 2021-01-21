@@ -70,7 +70,7 @@
                             index++;
                         }
                         change.call(that, index, old);
-                    }, 2000);
+                    }, 5000);
                 }
             }
             // 修正box
@@ -96,21 +96,13 @@
         });
     };
     function change(show, hide){
-        var opts = $(this).data('opts');
-        if(opts.dir == 'x'){
-            var x = show * opts['width'];
-            $(this).find('.ck-slide-wrapper').stop().animate({'margin-left':-x}, function(){opts['isAnimate'] = false;});
-            opts['isAnimate'] = true
-        }else{
-            $(this).find('.ck-slide-wrapper li').eq(hide).stop().animate({opacity:0});
-            $(this).find('.ck-slide-wrapper li').eq(show).show().css({opacity:0}).stop().animate({opacity:1});
-        }
-       
+        $(this).find('.ck-slide-wrapper li').eq(hide).stop().hide().animate({opacity:0});
+        $(this).find('.ck-slide-wrapper li').eq(show).show().css({opacity:0}).stop().animate({opacity:1});
         $(this).find('.ck-slidebox li').removeClass('current');
         $(this).find('.ck-slidebox li').eq(show).addClass('current');
     }
     $.fn.ckSlide.opts = {
-        autoPlay: false,
+        autoPlay: true,
         dir: null,
         isAnimate: false
     };

@@ -1,10 +1,10 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:69:"D:\phpstudy_pro\WWW\huimin/application/admin\view\document\index.html";i:1507032645;s:68:"D:\phpstudy_pro\WWW\huimin/application/admin\view\public\header.html";i:1506935140;s:68:"D:\phpstudy_pro\WWW\huimin/application/admin\view\public\dialog.html";i:1504823103;s:67:"D:\phpstudy_pro\WWW\huimin/application/admin\view\public\color.html";i:1506937069;s:68:"D:\phpstudy_pro\WWW\huimin/application/admin\view\public\footer.html";i:1505402999;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:69:"D:\phpstudy_pro\WWW\huimin/application/admin\view\document\index.html";i:1611113880;s:68:"D:\phpstudy_pro\WWW\huimin/application/admin\view\public\header.html";i:1610938211;s:68:"D:\phpstudy_pro\WWW\huimin/application/admin\view\public\dialog.html";i:1504823103;s:67:"D:\phpstudy_pro\WWW\huimin/application/admin\view\public\color.html";i:1506937069;s:68:"D:\phpstudy_pro\WWW\huimin/application/admin\view\public\footer.html";i:1610936969;}*/ ?>
  <!-- 头部 -->
 	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-	<title><?php echo (isset($meta_title) && ($meta_title !== '')?$meta_title:""); ?>|贝云cms后台管理</title>
+	<title><?php echo (isset($meta_title) && ($meta_title !== '')?$meta_title:""); ?>|慧敏职业学校后台管理</title>
     	<link rel="stylesheet" href="__COMMON__/font-awesome/css/font-awesome.min.css">
 		<link rel="stylesheet" href="__CSS__/style.css" />
 
@@ -278,25 +278,19 @@ tr:hover{ background-color:#f9f9f9;}
 					       标题：<input type="text" name="title" class="search_ipt" value="<?php echo input('title'); ?>"/>
 					  
 					  </div>
-						  <div class="group">
+					 <div class="group" style="display: none">
 					     关键字：<input type="text" name="content"  class="search_ipt" value="<?php echo input('content'); ?>"/>
 					  </div>
 					   <div class="group">
 					      状态：<select name="status" class="search_ipt">						  
+					           <option value="" >全部</option>
 					           <option value="1" >正常</option>
-							   <option value="0" >禁用</option>
+							   <option value="2" >禁用</option>
 			                  </select>
 						  </div>
-						  <div class="group">分类：<select name="pid" class="search_ipt end">
-							 <option value="0">全部</option>
-							 <?php if(is_array($sidebar) || $sidebar instanceof \think\Collection || $sidebar instanceof \think\Paginator): $i = 0; $__LIST__ = $sidebar;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
-							    <option value="<?php echo $vo['id']; ?>"><?php echo $vo['title']; ?></option>
-							      <?php if(is_array($vo['child']) || $vo['child'] instanceof \think\Collection || $vo['child'] instanceof \think\Paginator): $i = 0; $__LIST__ = $vo['child'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo1): $mod = ($i % 2 );++$i;?> 
-							        <option value="<?php echo $vo1['id']; ?>">|——<?php echo $vo1['title']; ?></option>
-							            <?php if(is_array($vo1['child']) || $vo1['child'] instanceof \think\Collection || $vo1['child'] instanceof \think\Paginator): $i = 0; $__LIST__ = $vo1['child'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo2): $mod = ($i % 2 );++$i;?>
-							               -- <option value="<?php echo $vo2['id']; ?>">|————<?php echo $vo2['title']; ?></option>
-							          <?php endforeach; endif; else: echo "" ;endif; endforeach; endif; else: echo "" ;endif; endforeach; endif; else: echo "" ;endif; ?>
-			                 </select><input type="button" class="search_btn"value="搜索" onclick="$('.search-form').submit()">
+						  <div class="group">
+							  <input type="hidden" name="category_id" value="<?php echo $category_id; ?>">
+							  <input type="button" class="search_btn"value="搜索" onclick="$('.search-form').submit()">
 						  </div>
 					</form>
 					</div>
@@ -335,7 +329,7 @@ tr:hover{ background-color:#f9f9f9;}
 
 
 										<td><?php echo get_category($vo['category_id'],'title'); ?></td>
-										<td><?php echo $vo['status']; ?></td>
+										<td><?php echo $vo['status']==1?"正常":"禁用"; ?></td>
 										<td><?php echo date("Y-m-d h:i",$vo['create_time']); ?></td>
 
 
@@ -366,10 +360,9 @@ tr:hover{ background-color:#f9f9f9;}
 	              
 <script src="__JS__/common.js"></script>
 <script>
-var html='<footer style=""><p> Powered by <a href="http://www.bycms.cn/" target="_blank">bycms V1.0</a> </p></footer>';
+var html='<footer style=""><p> 版权所有 慧敏职业学校  </p></footer>';
 
 $(".content").append(html);
-switchEvent("#switch",function(){alert("开啦")},function(){alert("关了")});
 </script>
 </body>
 </html>

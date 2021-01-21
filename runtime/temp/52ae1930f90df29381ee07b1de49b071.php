@@ -1,15 +1,15 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:66:"D:\phpstudy_pro\WWW\huimin/application/index\view\index\index.html";i:1610788957;s:68:"D:\phpstudy_pro\WWW\huimin/application/index\view\public\header.html";i:1610713576;s:68:"D:\phpstudy_pro\WWW\huimin/application/index\view\public\footer.html";i:1610702109;}*/ ?>
-<!DOCTYPE html><html>	<head>		<meta charset="utf-8" />		<title><?php echo $meta_title; ?>_<?php echo C('WEB_SITE_TITLE'); ?></title>        <script type="text/javascript" src="__COMMON__/jquery.min.js"></script>	    <meta name="keywords" content="<?php echo C('KEYWORD'); ?>"/>	    <meta name="description" content="<?php echo C('DESCRIPTION'); ?>"/>		<link href="__CSS__/base.css" rel="stylesheet" type="text/css" />		<link href="__CSS__/style.css" rel="stylesheet" type="text/css" />		<script src="__JS__/slide.js"></script>		<script type="text/javascript" src="__JS__/lbnews.js"></script><script type="text/javascript">$(document).ready(function(){	$("#scrollDiv").Scroll({line:1,speed:600,timer:3000,up:"but_up",down:"but_down"});});</script><script src="__JS__/base.js"></script></head><body><!--header--><div class="index_body"><div class="header">     <div class="w1200">          <div class="head">          <span class="fl logo"><a href="#"><img src="<?php echo C('LOGO'); ?>" width="688" height="80" /></a></span>          <span class="fr top">          <em>招生电话：<?php echo C('guojicode'); ?></em>          <em>招生电话：<?php echo C('procode'); ?></em>          <em>招生电话：<?php echo C('PHONE'); ?></em>          </span>          <div class="clear"></div>          </div>          <div class="menu">          <ul>        		  <?php if(is_array($menu) || $menu instanceof \think\Collection || $menu instanceof \think\Paginator): $i = 0; $__LIST__ = $menu;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>          <li><a href="<?php echo get_url($vo['url']); ?>" target="<?php echo $vo['target']; ?>"><?php echo $vo['title']; ?></a>          <div class="snav">                <dl>                  <?php if(is_array($vo['items']) || $vo['items'] instanceof \think\Collection || $vo['items'] instanceof \think\Paginator): $i = 0; $__LIST__ = $vo['items'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo1): $mod = ($i % 2 );++$i;?>				    <dd><a href="<?php echo get_url($vo1['url']); ?>" target="<?php echo $vo['target']; ?>"><?php echo $vo1['title']; ?></a></dd>                                        				 <?php endforeach; endif; else: echo "" ;endif; ?>                </dl>          </div>          </li>		  <?php endforeach; endif; else: echo "" ;endif; ?>                           </ul>          <div class="clear"></div>          </div>     </div></div> 
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:66:"D:\phpstudy_pro\WWW\huimin/application/index\view\index\index.html";i:1611113773;s:68:"D:\phpstudy_pro\WWW\huimin/application/index\view\public\header.html";i:1610971710;s:68:"D:\phpstudy_pro\WWW\huimin/application/index\view\public\footer.html";i:1611039373;}*/ ?>
+<!DOCTYPE html><html>	<head>		<meta charset="utf-8" />		<title><?php echo $meta_title; ?>_<?php echo C('WEB_SITE_TITLE'); ?></title>        <script type="text/javascript" src="__COMMON__/jquery.min.js"></script>	    <meta name="keywords" content="<?php echo C('KEYWORD'); ?>"/>	    <meta name="description" content="<?php echo C('DESCRIPTION'); ?>"/>		<link href="__CSS__/base.css" rel="stylesheet" type="text/css" />		<link href="__CSS__/style.css" rel="stylesheet" type="text/css" />		<script src="__JS__/slide.js"></script>		<script type="text/javascript" src="__JS__/lbnews.js"></script><script type="text/javascript">$(document).ready(function(){	$("#scrollDiv").Scroll({line:1,speed:600,timer:3000,up:"but_up",down:"but_down"});});</script><script src="__JS__/base.js"></script></head><body><!--header--><div class="index_body"><div class="header">     <div class="w1200">          <div class="head">          <span class="fl logo"><a href="#"><img src="<?php echo C('LOGO'); ?>" width="688" height="80" /></a></span>          <span class="fr top">          <em>招生电话：<?php echo C('guojicode'); ?></em>          <em>招生电话：<?php echo C('PHONE'); ?></em>          </span>          <div class="clear"></div>          </div>          <div class="menu">          <ul>        		  <?php if(is_array($menu) || $menu instanceof \think\Collection || $menu instanceof \think\Paginator): $i = 0; $__LIST__ = $menu;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>          <li><a href="<?php echo get_url($vo['url']); ?>" target="<?php echo $vo['target']; ?>"><?php echo $vo['title']; ?></a>          <div class="snav">                <dl>                  <?php if(is_array($vo['items']) || $vo['items'] instanceof \think\Collection || $vo['items'] instanceof \think\Paginator): $i = 0; $__LIST__ = $vo['items'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo1): $mod = ($i % 2 );++$i;?>				    <dd><a href="<?php echo get_url($vo1['url']); ?>" target="<?php echo $vo['target']; ?>"><?php echo $vo1['title']; ?></a></dd>                                        				 <?php endforeach; endif; else: echo "" ;endif; ?>                </dl>          </div>          </li>		  <?php endforeach; endif; else: echo "" ;endif; ?>                           </ul>          <div class="clear"></div>          </div>     </div></div> 
 <!--banner-->
 <div class="banner">
     <div class="w1200">
     <div class="ck-slide">
     <ul class="ck-slide-wrapper">
                        <?php $__LIST__= parseSlide(1,'sort asc',5); if(is_array($__LIST__) || $__LIST__ instanceof \think\Collection || $__LIST__ instanceof \think\Paginator): $i = 0; $__LIST__ = $__LIST__;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
-								<li>
-									<a href="<?php echo get_url($vo['url']); ?>"><img src="<?php echo get_cover_path($vo['cover_id']); ?>"/></a>
-								</li>
-								<?php endforeach; endif; else: echo "" ;endif; ?>	
+                            <li>
+                                <a href="<?php echo get_url($vo['url']); ?>" target="_blank"><img src="<?php echo get_cover_path($vo['cover_id']); ?>"/></a>
+                            </li>
+						<?php endforeach; endif; else: echo "" ;endif; ?>
     </ul>
     <div class="ck-slidebox">
     <div class="slideWrap">
@@ -38,10 +38,7 @@
             <h1>重要通知</h1>
 			<ul>
 			<?php $__LIST__= parseCate(15,'id desc',6); if(is_array($__LIST__) || $__LIST__ instanceof \think\Collection || $__LIST__ instanceof \think\Paginator): $i = 0; $__LIST__ = $__LIST__;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
-          
-
-            <li><a href="<?php echo url('article/detail?id='.$vo['id']); ?>"><em><?php echo date("Y-m-d",$vo['create_time']); ?></em>· <?php echo $vo['title']; ?>...</a></li>
-           
+            <li style="float: none"><a href="<?php echo url('article/detail?id='.$vo['id']); ?>"><em><?php echo date("Y-m-d",$vo['create_time']); ?></em>· <?php echo $vo['title']; ?>...</a></li>
 			<?php endforeach; endif; else: echo "" ;endif; ?>
 			</ul>
 		</div>
@@ -70,7 +67,7 @@
                             </ul>
                         </div>
                     </div>
-                    <script defer src="__JS__/slider.js"></script> 
+                    <script defer src="__JS__/slider.js"></script>
                     <script type="text/javascript">
                     $(function(){
                       $('.flexslider').flexslider({
@@ -284,20 +281,6 @@
           </div>
      </div>
 </div>
-<div class="link">
-     <div class="wrap">
-          <div class="ship">
-          <ul>
-		    <?php $__LIST__= parseLink('id desc',10); if(is_array($__LIST__) || $__LIST__ instanceof \think\Collection || $__LIST__ instanceof \think\Paginator): $i = 0; $__LIST__ = $__LIST__;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
-			 <li> <a href="<?php echo get_url($vo['url']); ?>"><img src="<?php echo get_cover_path($vo['cover_id']); ?>" width="148" height="48" /></a>
-            </li>
-			<?php endforeach; endif; else: echo "" ;endif; ?>
-
-          </ul>
-          <div class="clear"></div>
-       </div>
-     </div>
-</div>
 <script>
     $(function () {
         var num=$("#starul").find("li").length;
@@ -311,47 +294,14 @@
             }, 5000);
         }
     })
-   /* window.onload = function () {
-        var oDiv = document.getElementById('star');
-        var oUl = oDiv.getElementsByTagName('ul')[0];
-        var aLi = oUl.getElementsByTagName('li');
-        var timer = null;
-        var iSpeed = -5;
-        oUl.innerHTML += oUl.innerHTML;
-        oUl.style.height = aLi.length * aLi[0].offsetHeight + 'px';
-        timer =setTimeout(fnMove, 100);
-        oDiv.onmouseover = function () {
-            clearInterval(timer);
-        }
-        oDiv.onmouseout = function () {
-            clearInterval(timer);
-            timer = setInterval(fnMove, 100);
-        }
-        function fnMove() {
-            if (oUl.offsetTop < -oUl.offsetHeight /10) {
-                oUl.style.top = 0;
-            }
-            oUl.style.top = oUl.offsetTop + iSpeed + 'px';
-            if ((oUl.offsetTop % 50) == 0) {
-                clearInterval(timer);
-                timer =setTimeout(fnMove, 2000);
-
-            } else {
-                clearInterval(timer);
-                timer = setTimeout(fnMove, 100);
-            }
-        }
-    }*/
 </script>
 <!--footer-->
 	<div class="footer">
      <div class="w1200">
      <div class="f_menu"> <?php if(is_array($menu) || $menu instanceof \think\Collection || $menu instanceof \think\Paginator): $i = 0; $__LIST__ = $menu;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><a href="<?php echo get_url($vo['url']); ?>"><?php echo $vo['title']; ?></a> <?php endforeach; endif; else: echo "" ;endif; ?></div>
-     <p>联系我们版权所有©慧敏职业学校 <?php echo C("ISP"); ?> 本站介绍：慧敏职业学校</p>
-     <p>地址：<?php echo C("ADDRESS"); ?>　 电话：<?php echo C("PHONE"); ?></p>
     <div class="qrcode"><span><img src="__IMG__/wx.jpg" width="100" height="100"><p>微信</p></span><span><img src="__IMG__/alipay.png" width="100" height="100"><p>服务窗</p></span></div>
 	 </div>
-     
+    <p>版权所有©慧敏职业学校 &nbsp;&nbsp;&nbsp;&nbsp;地址：<?php echo C("ADDRESS"); ?>&nbsp;&nbsp;&nbsp;&nbsp;电话：<?php echo C("PHONE"); ?></p>
 </div>
 </body>
 </html>

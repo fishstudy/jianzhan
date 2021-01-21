@@ -1,12 +1,8 @@
 <?php
 // +----------------------------------------------------------------------
-// | 贝云cms内容管理系统 [ 简单 高效 卓越 ]
 // +----------------------------------------------------------------------
-// | Copyright (c) 2017 http://www.bycms.cn All rights reserved.
+// | Copyright (c) 2021 fish_study
 // +----------------------------------------------------------------------
-// | 版权申明：贝云cms内容管理系统不是一个自由软件，是贝云网络官方推出的商业源码，严禁在未经许可的情况下
-// | 拷贝、复制、传播、使用贝云cms内容管理系统的任意代码，如有违反，请立即删除，否则您将面临承担相应
-// | 法律责任的风险。如果需要取得官方授权，请联系官方http://www.bycms.cn
 // +----------------------------------------------------------------------
 namespace app\admin\controller;
 use think\Controller;
@@ -48,7 +44,7 @@ class Config extends Admin{
 		$this->redirect($url); 
 	}
 	//系统配置
-	public function systems($config =""){   
+	public function systems($config =""){
 	    if($_POST){
 		   if($config && is_array($config)){
             $Config =db('Config');
@@ -65,8 +61,7 @@ class Config extends Admin{
 		   }else{
 			   $this->error("更新失败！");
 		   } 
-	  }
-	  else{
+	  } else{
 		$group  =  input('group');
         $map['group']=$group?$group:0;
 		$type   = C("GROUP");
@@ -77,7 +72,6 @@ class Config extends Admin{
         $this->assign('type',$group);//dump($type);
 		$this->assign('groups',$type);
         $this->meta_title = '系统设置';
-       
 		$this->assign('meta_title', $this->meta_title);
 	    return $this->fetch();
 	   }

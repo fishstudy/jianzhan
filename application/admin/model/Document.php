@@ -1,12 +1,8 @@
 <?php
 // +----------------------------------------------------------------------
-// | 贝云cms内容管理系统 [ 简单 高效 卓越 ]
 // +----------------------------------------------------------------------
-// | Copyright (c) 2017 http://www.bycms.cn All rights reserved.
+// | Copyright (c) 2021 fish_study
 // +----------------------------------------------------------------------
-// | 版权申明：贝云cms内容管理系统不是一个自由软件，是贝云网络官方推出的商业源码，严禁在未经许可的情况下
-// | 拷贝、复制、传播、使用贝云cms内容管理系统的任意代码，如有违反，请立即删除，否则您将面临承担相应
-// | 法律责任的风险。如果需要取得官方授权，请联系官方http://www.bycms.cn
 // +----------------------------------------------------------------------
 namespace app\admin\model;
 use think\Model;
@@ -16,22 +12,37 @@ use think\Db;
  */
 class Document extends Model{
   
-     protected $auto = ["create_time","update_time","uid"];
+     protected $auto = ["create_time","update_time","uid",'status'];
      protected $insert = ["create_time","update_time","uid"];  
-     protected $update = ["create_time","update_time","uid"];  
+     protected $update = ["update_time","uid"];
      protected function setCreateTimeAttr(){
 		   $create_time  = input('create_time');
 		   return $create_time?strtotime($create_time):time();
 		
     }
+
+    protected function setStatusAttr(){
+         //1:正常，2禁用 新增文章默认禁用
+        $status = input('status');
+        return $status?$status:2;
+
+    }
 	protected function setUidAttr(){
 		return is_login();
     }
+
     protected function setUpdateTimeAttr(){
-		
 		   $update_time  = input('update_time');
-		   return $update_time?strtotime($update_time):time();
-		
+		   if( !empty($update_time) ){
+               $update_time = strtotime($update_time);
+               $curent = time();
+               if($update_time < $curent){
+                   $update_time = $curent;
+               }
+           } else {
+               $update_time = time();
+           }
+		   return $update_time;
     }
     /**
      * 获取详情页数据
@@ -49,8 +60,8 @@ class Document extends Model{
         }	
 		
         /* 获取模型数据 */
-		$name  =get_models($info["model_id"],'name');
-		$merge=Db::name($name)->find($id);
+		$name  = get_models($info["model_id"],'name');
+		$merge = Db::name($name)->find($id);
         if($merge){
 			$info = array_merge($info, $merge);
 		}
@@ -63,6 +74,7 @@ class Document extends Model{
     public function updatePost($id = null){
           $Document =new \app\admin\Model\Document;
 		  if(!$_POST['id']){ //新增属性{
+
 				 $res=$Document->validate(true)->allowField(true)->save($_POST);
 				 if(!$res){
 					 $error=$Document->getError()?$Document->getError():"新增失败";
@@ -74,7 +86,7 @@ class Document extends Model{
 		  }else{
 		     $res=$Document->validate(true)->allowField(true)->save($_POST,['id' => $_POST['id']]);
 		     if(!$res){
-					 $error=$Document->getError()?$Document->getError():"更新失败";
+					 $error=$Document->getError()?$Document->getError():"更新失败1";
 					 $this->error=$error;
 			         return false;
 			 }
@@ -94,7 +106,7 @@ class Document extends Model{
         } else { //更新数据
             $status = $class->allowField(true)->save($_POST,['id' =>$_POST['id']]);
             if (false === $status) {
-                $this->error = '更新数据失败！';
+                $this->error = '更新数据失败2！';
                 return false;
             }
          }

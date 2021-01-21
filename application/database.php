@@ -18,7 +18,8 @@ return [
     // 用户名
     'username'        => 'root', // 用户名
     // 密码
-    'password'        => 'test123456',  // 密码
+    //'password'        => 'shjskona0620',  // 密码
+    'password'        => 'kona0620',  // 密码
     // 端口
     'hostport'        => '3306', // 端口
     // 连接dsn

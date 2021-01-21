@@ -1,10 +1,10 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:68:"D:\phpstudy_pro\WWW\huimin/application/admin\view\picture\index.html";i:1506941228;s:68:"D:\phpstudy_pro\WWW\huimin/application/admin\view\public\header.html";i:1506935140;s:68:"D:\phpstudy_pro\WWW\huimin/application/admin\view\public\dialog.html";i:1504823103;s:67:"D:\phpstudy_pro\WWW\huimin/application/admin\view\public\color.html";i:1506937069;s:68:"D:\phpstudy_pro\WWW\huimin/application/admin\view\public\footer.html";i:1505402999;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:68:"D:\phpstudy_pro\WWW\huimin/application/admin\view\picture\index.html";i:1506941228;s:68:"D:\phpstudy_pro\WWW\huimin/application/admin\view\public\header.html";i:1610938211;s:68:"D:\phpstudy_pro\WWW\huimin/application/admin\view\public\dialog.html";i:1504823103;s:67:"D:\phpstudy_pro\WWW\huimin/application/admin\view\public\color.html";i:1506937069;s:68:"D:\phpstudy_pro\WWW\huimin/application/admin\view\public\footer.html";i:1610936969;}*/ ?>
  <!-- 头部 -->
 	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-	<title><?php echo (isset($meta_title) && ($meta_title !== '')?$meta_title:""); ?>|贝云cms后台管理</title>
+	<title><?php echo (isset($meta_title) && ($meta_title !== '')?$meta_title:""); ?>|慧敏职业学校后台管理</title>
     	<link rel="stylesheet" href="__COMMON__/font-awesome/css/font-awesome.min.css">
 		<link rel="stylesheet" href="__CSS__/style.css" />
 
@@ -342,10 +342,9 @@ tr:hover{ background-color:#f9f9f9;}
 	
 <script src="__JS__/common.js"></script>
 <script>
-var html='<footer style=""><p> Powered by <a href="http://www.bycms.cn/" target="_blank">bycms V1.0</a> </p></footer>';
+var html='<footer style=""><p> 版权所有 慧敏职业学校  </p></footer>';
 
 $(".content").append(html);
-switchEvent("#switch",function(){alert("开啦")},function(){alert("关了")});
 </script>
 </body>
 </html>

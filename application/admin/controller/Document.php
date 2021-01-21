@@ -1,20 +1,16 @@
 <?php
 // +----------------------------------------------------------------------
-// | 贝云cms内容管理系统 [ 简单 高效 卓越 ]
 // +----------------------------------------------------------------------
-// | Copyright (c) 2017 http://www.bycms.cn All rights reserved.
+// | Copyright (c) 2021 fish_study
 // +----------------------------------------------------------------------
-// | 版权申明：贝云cms内容管理系统不是一个自由软件，是贝云网络官方推出的商业源码，严禁在未经许可的情况下
-// | 拷贝、复制、传播、使用贝云cms内容管理系统的任意代码，如有违反，请立即删除，否则您将面临承担相应
-// | 法律责任的风险。如果需要取得官方授权，请联系官方http://www.bycms.cn
 // +----------------------------------------------------------------------
 namespace app\admin\controller;
 use think\Controller;
 use think\Db;
 class Document extends Admin{
     public function index(){     
-          if($_POST){
-			foreach ($_POST as $key=>$value){
+          if($_GET){
+			foreach ($_GET as $key=>$value){
 				if($value){
 					$map[$key]  = array('like', '%'.$value.'%');
 				 }
@@ -22,6 +18,9 @@ class Document extends Admin{
         }
 		$map=isset($map)?$map:'';
 		$pid=input('pid');
+		if(empty($pid)){
+            $pid = input("category_id");
+        }
         if(isset($pid)){
 			$Category=new \app\admin\model\Category;
             //当前id及子类列表
@@ -40,14 +39,16 @@ class Document extends Admin{
             $value["name"]  =   $value['title'];
 			$value["url"]  =url('document/index',array('pid'=>$value["id"]));
         }
-        $this->assign('sidebar', json_encode( $sidebar));
-	
+       $this->assign('sidebar', json_encode( $sidebar));
+       // $this->assign('sidebar',  $sidebar);
+
 		$pid=$pid?$pid:1;
 		$this->assign("pid",$pid);
-	    return $this->fetch(); 
+		$this->assign("category_id",$pid);
+	    return $this->fetch();
 	}
 
-   public function edit($id){   
+   public function edit($id){
 	    if($_POST){ 
 		   $Document = new \app\admin\model\Document;
 		   $res=$Document->updatePost();

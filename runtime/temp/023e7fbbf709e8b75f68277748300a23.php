@@ -1,9 +1,9 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:66:"D:\phpstudy_pro\WWW\huimin/application/admin\view\index\index.html";i:1507007537;s:68:"D:\phpstudy_pro\WWW\huimin/application/admin\view\public\dialog.html";i:1504823103;s:67:"D:\phpstudy_pro\WWW\huimin/application/admin\view\public\color.html";i:1506937069;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:66:"D:\phpstudy_pro\WWW\huimin/application/admin\view\index\index.html";i:1610938849;s:68:"D:\phpstudy_pro\WWW\huimin/application/admin\view\public\dialog.html";i:1504823103;s:67:"D:\phpstudy_pro\WWW\huimin/application/admin\view\public\color.html";i:1506937069;}*/ ?>
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="utf-8" />
-		<title><?php echo (isset($meta_title) && ($meta_title !== '')?$meta_title:""); ?>|yershop后台管理</title>
+		<title><?php echo (isset($meta_title) && ($meta_title !== '')?$meta_title:""); ?>|慧敏职业学校后台管理</title>
 		<link rel="stylesheet" href="__CSS__/style.css" />
 	    <link rel="stylesheet" href="__COMMON__/font-awesome/css/font-awesome.min.css">
 		<script type="text/javascript" src="__JS__/jquery.min.js" ></script>
@@ -40,6 +40,7 @@
    </style>
 <script src="__JS__/dialog.js"></script>	
 <?php endif; ?>
+
 	<!-- 换肤功能 -->
 	
 <style>
@@ -308,8 +309,8 @@ tr:hover{ background-color:#f9f9f9;}
 							<table>
 					<tbody>
 					<tr>
-						<th>bycms版本</th>
-						<td>v1.0.2</td>
+						<th>慧敏职业技术学校</th>
+						<td>v1.0.0</td>
 					</tr>
 					<tr>
 						<th>thinkphp版本</th>
@@ -322,18 +323,12 @@ tr:hover{ background-color:#f9f9f9;}
 						<td><?php echo PHP_OS; ?></td>
 					</tr>
 					
-					<tr>
-						<th>服务器解译引擎</th>
-						<td><?php echo $_SERVER['SERVER_SOFTWARE']; ?></td>
-					</tr>
+
 					<tr>
 						<th>应用部署目录 </th>
 												<td><?php echo getcwd(); ?></td>
 					</tr>
-					<tr>
-						<th>上传限制</th>
-						<td><?php echo ini_get('upload_max_filesize'); ?></td>
-					</tr>
+
 					
 				</tbody></table>
 	
@@ -344,32 +339,24 @@ tr:hover{ background-color:#f9f9f9;}
 					<tbody>
 					<tr>
 						<th>软件名称</th>
-						<td>贝云cms内容管理系统</td>
+						<td>内容管理系统</td>
 					</tr>
 					<tr>
-						<th>更新时间</th>
-						<td>2017-09-14</td>
-					</tr>
-					
-					<tr>
-						<th>官方网址</th>
-						<td><a href="http://www.bycms.cn" target="_blank">bycms.cn</a></td>
-					</tr>
-					<tr>
-						<th>商业授权</th>
-						<td><a href="http://www.bycms.cn/index/index/price.html" target="_blank">授权</a></td>
+						<th>服务器解译引擎</th>
+						<td><?php echo $_SERVER['SERVER_SOFTWARE']; ?></td>
 					</tr>
 					<tr>
 						<th>版权所有</th>
-						<td>武汉贝云网络科技有限公司</td>
+						<td>慧敏职业学校</td>
 					</tr>
 					<tr>
-						<th>使用帮助</th>
-						<td><a href="http://www.bycms.cn/index/Develop/index.html" target="_blank">文档</a></td>
+						<th>上传限制</th>
+						<td><?php echo ini_get('upload_max_filesize'); ?></td>
 					</tr>
+
 				</tbody></table>
 			</div>
 
 	</div>
-<div class="footer"><p> Powered by <a href="http://www.bycms.cn/" style="color:blue" target="_blank">byCms</a>  @武汉贝云网络科技有限公司 </p></div>
+<div class="footer"><p> Powered by   @慧敏职业技术学校 </p></div>
 

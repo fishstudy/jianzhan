@@ -5,10 +5,10 @@
     <div class="ck-slide">
     <ul class="ck-slide-wrapper">
                        {By:slide  place="1" name="vo" order="sort asc" limit="5"}
-								<li>
-									<a href="{$vo.url|get_url}"><img src="{$vo.cover_id|get_cover_path}"/></a>
-								</li>
-								{/By:slide}	
+                            <li>
+                                <a href="{$vo.url|get_url}" target="_blank"><img src="{$vo.cover_id|get_cover_path}"/></a>
+                            </li>
+						{/By:slide}
     </ul>
     <div class="ck-slidebox">
     <div class="slideWrap">
@@ -37,10 +37,7 @@
             <h1>重要通知</h1>
 			<ul>
 			{By:cate  cate_id='15' order="id desc" limit="6"  name="vo"}
-          
-
-            <li><a href="{:url('article/detail?id='.$vo['id'])}"><em>{$vo.create_time|date="Y-m-d",###}</em>· {$vo.title}...</a></li>
-           
+            <li style="float: none"><a href="{:url('article/detail?id='.$vo['id'])}"><em>{$vo.create_time|date="Y-m-d",###}</em>· {$vo.title}...</a></li>
 			{/By:cate}
 			</ul>
 		</div>
@@ -69,7 +66,7 @@
                             </ul>
                         </div>
                     </div>
-                    <script defer src="__JS__/slider.js"></script> 
+                    <script defer src="__JS__/slider.js"></script>
                     <script type="text/javascript">
                     $(function(){
                       $('.flexslider').flexslider({
@@ -283,20 +280,6 @@
           </div>
      </div>
 </div>
-<div class="link">
-     <div class="wrap">
-          <div class="ship">
-          <ul>
-		    {By:link name="vo" order="id desc" limit="10"}
-			 <li> <a href="{$vo.url|get_url}"><img src="{$vo.cover_id|get_cover_path}" width="148" height="48" /></a>
-            </li>
-			{/By:link}
-
-          </ul>
-          <div class="clear"></div>
-       </div>
-     </div>
-</div>
 <script>
     $(function () {
         var num=$("#starul").find("li").length;
@@ -310,37 +293,6 @@
             }, 5000);
         }
     })
-   /* window.onload = function () {
-        var oDiv = document.getElementById('star');
-        var oUl = oDiv.getElementsByTagName('ul')[0];
-        var aLi = oUl.getElementsByTagName('li');
-        var timer = null;
-        var iSpeed = -5;
-        oUl.innerHTML += oUl.innerHTML;
-        oUl.style.height = aLi.length * aLi[0].offsetHeight + 'px';
-        timer =setTimeout(fnMove, 100);
-        oDiv.onmouseover = function () {
-            clearInterval(timer);
-        }
-        oDiv.onmouseout = function () {
-            clearInterval(timer);
-            timer = setInterval(fnMove, 100);
-        }
-        function fnMove() {
-            if (oUl.offsetTop < -oUl.offsetHeight /10) {
-                oUl.style.top = 0;
-            }
-            oUl.style.top = oUl.offsetTop + iSpeed + 'px';
-            if ((oUl.offsetTop % 50) == 0) {
-                clearInterval(timer);
-                timer =setTimeout(fnMove, 2000);
-
-            } else {
-                clearInterval(timer);
-                timer = setTimeout(fnMove, 100);
-            }
-        }
-    }*/
 </script>
 <!--footer-->
 	{include file="public/footer" /}

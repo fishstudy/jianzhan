@@ -1,17 +1,14 @@
 <?php
 // +----------------------------------------------------------------------
-// | 贝云cms内容管理系统 [ 简单 高效 卓越 ]
 // +----------------------------------------------------------------------
-// | Copyright (c) 2017 http://www.bycms.cn All rights reserved.
+// | Copyright (c) 2021 fish_study
 // +----------------------------------------------------------------------
-// | 版权申明：贝云cms内容管理系统不是一个自由软件，是贝云网络官方推出的商业源码，严禁在未经许可的情况下
-// | 拷贝、复制、传播、使用贝云cms内容管理系统的任意代码，如有违反，请立即删除，否则您将面临承担相应
-// | 法律责任的风险。如果需要取得官方授权，请联系官方http://www.bycms.cn
 // +----------------------------------------------------------------------
 namespace app\admin\controller;
 use think\Controller;
 use think\Db;
 use think\Config;
+use think\Request;
 use think\Upload;
 class Uploads extends Admin{
 
@@ -27,9 +24,7 @@ class Uploads extends Admin{
 		$this->uploader = new Upload($setting, 'Local');
 			//addUserLog (  var_export($_FILES, true ), 1);
 		$info= $this->uploader->upload($_FILES);
-		
 		if($info){
-			
 			$EDITOR_UPLOAD=config('EDITOR_UPLOAD');
 			$url = $EDITOR_UPLOAD['rootPath'].$info['imgFile']['savepath'].$info['imgFile']['savename'];
 			$url = str_replace('./', '/', $url);
@@ -56,6 +51,40 @@ class Uploads extends Admin{
 		/* 返回JSON数据 */
 		exit(json_encode($return));
 	}
+
+    //keditor编辑器上传图片处理
+    public function upimg(Request $request){
+        $return  = array('error' => 0, 'info' => '上传成功', 'data' => '');
+        $data = [];
+        $data['md5']  = md5_file($_FILES['imgFile']['tmp_name']);
+        $data['sha1'] = sha1_file($_FILES['imgFile']['tmp_name']);
+        $img = $this->upload();
+
+        /* 记录附件信息 */
+        if($img){
+            $return['url'] = "/".trim($img['fullpath'],'//');
+            unset($return['info'], $return['data']);
+        } else {
+            $return['error'] = 1;
+            $return['message']   = session('upload_error');
+        }
+        $picid= $request->get("picid");
+        $obj=new \app\admin\model\Picture;
+        $data['path'] =  $return['url'];
+        $data['url'] = '';
+        $data['status'] = 1;
+        $data['create_time'] = time();
+        if(!empty($picid)){
+           $obj= $obj->find($picid);
+           $obj->save($data);
+           $return['id'] = $obj->id;
+        } else {
+            $obj->save($data);
+            $return['id'] = $obj->id;
+        }
+        /* 返回JSON数据 */
+        exit(json_encode($return));
+    }
 
 	
 

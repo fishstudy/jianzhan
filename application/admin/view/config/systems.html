@@ -1,7 +1,6 @@
  <!-- 头部 -->
 	{include file='public/header'}
-<!-- 头部 -->  
-			<script type="text/javascript" src="__COMMON__/uploadify/jquery.uploadify.min.js"></script>	
+<!-- 头部 -->
   <script type="text/javascript" src="__COMMON__/jquery.colorpicker.js"></script>	
 			<div class="content">
 			<div class="tips_msg none"><span class="tips">保存成功</span><span class="close_tips"></span></div>
@@ -54,51 +53,20 @@
 						   <div class="upload_div">
 								<div class="input_title">{$config.title}{notempty name='config.remark'}<span>({$config.remark})</span>{/notempty}</div>
 								<div class="upload_btn_group">
-									<div class="upload_btn">上传图片</div>
-									<input type="file" class="upload_file" id="{$config.name}"/>
+
+									<input type="file" class="upload_file" id="{$config.name}" onchange="upload()"/>
 							 	</div>
 								<div class="upload_imgs h50">
-									<input type="hidden" name="config[{$config.name}]"  value="{$config.value}"	>
+									<input type="hidden" name="config[{$config.name}]"  value="{$config.value}"	id="config[{$config.name}]">
 									  <span class="upload_imgs_wrap upload-pre-img-{$config.name} ">
 							          {notempty name="$config.value"}  
-									  <div class="upload-pre-item"> 
+									  <div class="upload-pre-item" id="upload-pre-item">
 									    <img src="{$config.value|get_cover_path}"/>
 						                </div>
 									  {/notempty}
 									</span>
 								</div>
-							</div>										
-					    <script type="text/javascript">
-
-
-
-				    /* 初始化上传插件 */
-					$("#{$config.name}").uploadify({
-				        "height"          : 30,
-				        "swf"             : "__COMMON__/uploadify/uploadify.swf",
-				        "fileObjName"     : "download",
-				        "buttonText"      : "上传图片",
-				        "uploader"        : "{:url('File/uploadPicture',array('session_id'=>session_id()))}",
-				        "width"           : 120,
-				        'removeTimeout'	  : 1,
-				        'fileTypeExts'	  : '*.jpg; *.png; *.gif;',
-				        "onUploadSuccess" : uploadPicture{$config.name},
-				        'onFallback' : function() {
-				            alert('未检测到兼容版本的Flash.');
-				        }
-				    });
-					function uploadPicture{$config.name}(file, data){
-				    	var data = $.parseJSON(data);
-				    	var src = '';
-				        if(data.status){
-				        	src = data.url || data.path;
-							$("input[name='config[{$config.name}]']").val(data.id);
-				        	$('.upload-pre-img-{$config.name}').html(
-				        		' <div class="upload-pre-item"><img src="' +src + '"/> </div>'
-				        	);
-				        } 
-				    }
-					</script>
+							</div>
                      {/case}
 
 					 
@@ -120,9 +88,31 @@
 		</div>
 		
 	
-    <script>		
-	  
-				$(".p_menue").on('click',function(){
+    <script>
+		function upload() {
+			var form = new FormData();
+			var img_file = $("#LOGO").val();
+			var fileobj = $("#LOGO")[0].files[0];
+			form.append('name',img_file);
+			form.append('imgFile',fileobj);
+			$.ajax({
+				url: "/admin.php/uploads/upimg.html?dir=image",
+				data: form,
+				dataType:'JSON',
+				type: "POST",
+				processData:false,
+				contentType:false,
+				success: function(res){
+					 console.dir(res);
+					// console.log(res);
+					$("#hidden_img").show();
+					$("#upload-pre-item").html('<img width="60px" class="up_img" src="'+res.url+'" />');
+					$("#config[LOGO]").val(res.url);
+				}
+			})
+		}
+
+		$(".p_menue").on('click',function(){
 					if($(this).parent(".menue").hasClass("down")){
 						$(this).parent(".menue").removeClass("down").addClass("up");
 						$(this).find("span").attr("class","folder_icon_on");
