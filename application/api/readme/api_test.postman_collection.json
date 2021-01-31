@@ -1,0 +1,771 @@
+{
+	"info": {
+		"_postman_id": "7e07355d-21f7-43b7-ba44-77bffacf6418",
+		"name": "api_test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "v0_user",
+			"item": [
+				{
+					"name": "v0_用户新增",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Cookie",
+								"type": "text",
+								"value": "PHPSESSID=vbcl7h0835k52lue85g2oknhc6"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"username\":\"teacher1\",\"password\":\"123456\",\"mobile\":\"13856783322\",\"sex\":1,\"nickname\":\"宋江\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://huiminschool.dev.com:8088/v0/api/user/add",
+							"protocol": "http",
+							"host": [
+								"huiminschool",
+								"dev",
+								"com"
+							],
+							"port": "8088",
+							"path": [
+								"v0",
+								"api",
+								"user",
+								"add"
+							]
+						},
+						"description": "新增用户"
+					},
+					"response": []
+				},
+				{
+					"name": "v0_用户登录并获取token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"username\":\"teacher1\",\"password\":\"123456\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://huiminschool.dev.com:8088/v0/api/user/login",
+							"protocol": "http",
+							"host": [
+								"huiminschool",
+								"dev",
+								"com"
+							],
+							"port": "8088",
+							"path": [
+								"v0",
+								"api",
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v0_根据token，获取用户详情",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "e9a3a7477f7ca4e35e9e36256561a8e3",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://huiminschool.dev.com:8088/v0/api/user/getInfoByToken?token=e9a3a7477f7ca4e35e9e36256561a8e3",
+							"protocol": "http",
+							"host": [
+								"huiminschool",
+								"dev",
+								"com"
+							],
+							"port": "8088",
+							"path": [
+								"v0",
+								"api",
+								"user",
+								"getInfoByToken"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "e9a3a7477f7ca4e35e9e36256561a8e3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v0_根据用户ID，获取用户详情",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://huiminschool.dev.com:8088/v0/api/user/detail?uid=1232",
+							"protocol": "http",
+							"host": [
+								"huiminschool",
+								"dev",
+								"com"
+							],
+							"port": "8088",
+							"path": [
+								"v0",
+								"api",
+								"user",
+								"detail"
+							],
+							"query": [
+								{
+									"key": "uid",
+									"value": "1232"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "v1_user",
+			"item": [
+				{
+					"name": "v1_用户登录并获取token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"username\":\"teacher4\",\"password\":\"123456\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://huiminschool.dev.com:8088/v1/api/user/login",
+							"protocol": "http",
+							"host": [
+								"huiminschool",
+								"dev",
+								"com"
+							],
+							"port": "8088",
+							"path": [
+								"v1",
+								"api",
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1_用户新增",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "PHPSESSID=vbcl7h0835k52lue85g2oknhc6",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"username\":\"teacher4\",\"password\":\"123456\",\"password2\":\"123456\",\"sex\":\"1\",\"mobile\":\"12222222251\",\"nickname\":\"11111111111111111111\",\"submit_time\":\"2020-12-01 23:01:01\",\"age\":\"\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://huiminschool.dev.com:8088/v1/api/user/add",
+							"protocol": "http",
+							"host": [
+								"huiminschool",
+								"dev",
+								"com"
+							],
+							"port": "8088",
+							"path": [
+								"v1",
+								"api",
+								"user",
+								"add"
+							]
+						},
+						"description": "新增用户"
+					},
+					"response": []
+				},
+				{
+					"name": "v1_根据token，获取用户详情",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "e9a3a7477f7ca4e35e9e36256561a8e3",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://huiminschool.dev.com:8088/v1/api/user/getInfoByToken?token=e9a3a7477f7ca4e35e9e36256561a8e3",
+							"protocol": "http",
+							"host": [
+								"huiminschool",
+								"dev",
+								"com"
+							],
+							"port": "8088",
+							"path": [
+								"v1",
+								"api",
+								"user",
+								"getInfoByToken"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "e9a3a7477f7ca4e35e9e36256561a8e3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1_根据token，获取seq",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"type": "text",
+								"value": "e9a3a7477f7ca4e35e9e36256561a8e3"
+							}
+						],
+						"url": {
+							"raw": "http://huiminschool.dev.com:8088/v1/api/user/getCsrfSeq",
+							"protocol": "http",
+							"host": [
+								"huiminschool",
+								"dev",
+								"com"
+							],
+							"port": "8088",
+							"path": [
+								"v1",
+								"api",
+								"user",
+								"getCsrfSeq"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1_根据用户ID，获取用户详情",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://huiminschool.dev.com:8088/v1/api/user/detail?uid=1232",
+							"protocol": "http",
+							"host": [
+								"huiminschool",
+								"dev",
+								"com"
+							],
+							"port": "8088",
+							"path": [
+								"v1",
+								"api",
+								"user",
+								"detail"
+							],
+							"query": [
+								{
+									"key": "uid",
+									"value": "1232"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "v2_user",
+			"item": [
+				{
+					"name": "v2_用户登录并获取token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"username\":\"teacher4\",\"password\":\"123456\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://huiminschool.dev.com:8088/v2/api/user/login",
+							"protocol": "http",
+							"host": [
+								"huiminschool",
+								"dev",
+								"com"
+							],
+							"port": "8088",
+							"path": [
+								"v2",
+								"api",
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v2_用户新增",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Cookie",
+								"type": "text",
+								"value": "PHPSESSID=vbcl7h0835k52lue85g2oknhc6"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"username\":\"3teacher\",\"password\":\"123456\",\"password2\":\"123456\",\"sex\":\"1\",\"mobile\":\"15222222222\",\"nickname\":\"11111111111111111111\",\"submit_time\":\"2020-12-01 23:01:01\",\"age\":\"\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://huiminschool.dev.com:8088/v2/api/user/add",
+							"protocol": "http",
+							"host": [
+								"huiminschool",
+								"dev",
+								"com"
+							],
+							"port": "8088",
+							"path": [
+								"v2",
+								"api",
+								"user",
+								"add"
+							]
+						},
+						"description": "新增用户"
+					},
+					"response": []
+				},
+				{
+					"name": "v2_根据用户ID，获取用户详情",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "d85f49160dbe34591ae106397f3f6d7f",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://huiminschool.dev.com:8088/v2/api/user/detail?uid=1339",
+							"protocol": "http",
+							"host": [
+								"huiminschool",
+								"dev",
+								"com"
+							],
+							"port": "8088",
+							"path": [
+								"v2",
+								"api",
+								"user",
+								"detail"
+							],
+							"query": [
+								{
+									"key": "uid",
+									"value": "1339"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v2_根据token，获取用户详情",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"type": "text",
+								"value": "e9a3a7477f7ca4e35e9e36256561a8e3"
+							}
+						],
+						"url": {
+							"raw": "http://huiminschool.dev.com:8088/v2/api/user/getInfoByToken?token=d85f49160dbe34591ae106397f3f6d7f",
+							"protocol": "http",
+							"host": [
+								"huiminschool",
+								"dev",
+								"com"
+							],
+							"port": "8088",
+							"path": [
+								"v2",
+								"api",
+								"user",
+								"getInfoByToken"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "d85f49160dbe34591ae106397f3f6d7f"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v2_根据token，获取seq",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"type": "text",
+								"value": "d85f49160dbe34591ae106397f3f6d7f"
+							}
+						],
+						"url": {
+							"raw": "http://huiminschool.dev.com:8088/v2/api/user/getCsrfSeq",
+							"protocol": "http",
+							"host": [
+								"huiminschool",
+								"dev",
+								"com"
+							],
+							"port": "8088",
+							"path": [
+								"v2",
+								"api",
+								"user",
+								"getCsrfSeq"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "城市查询",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "c00e1c5967d37aeb97099f3586f52770",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "",
+							"value": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://huiminschool.dev.com:8088/api/area/detail?id=820002&code=49423",
+					"protocol": "http",
+					"host": [
+						"huiminschool",
+						"dev",
+						"com"
+					],
+					"port": "8088",
+					"path": [
+						"api",
+						"area",
+						"detail"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "820002"
+						},
+						{
+							"key": "code",
+							"value": "49423"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "城市删除",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://huiminschool.dev.com:8088/api/area/delete?id=820001",
+					"protocol": "http",
+					"host": [
+						"huiminschool",
+						"dev",
+						"com"
+					],
+					"port": "8088",
+					"path": [
+						"api",
+						"area",
+						"delete"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "820001"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "获取验证码code",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "70ca09a51809a3e4dba00ab016f2870e",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://huiminschool.dev.com:8088/api/area/getCsrfTokenRedis",
+					"protocol": "http",
+					"host": [
+						"huiminschool",
+						"dev",
+						"com"
+					],
+					"port": "8088",
+					"path": [
+						"api",
+						"area",
+						"getCsrfTokenRedis"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "城市初始化",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {},
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"title\": \"项城\", \"pid\": \"100\",\"weight\":\"100\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://huiminschool.dev.com:8088/api/area/areaInit",
+					"protocol": "http",
+					"host": [
+						"huiminschool",
+						"dev",
+						"com"
+					],
+					"port": "8088",
+					"path": [
+						"api",
+						"area",
+						"areaInit"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "城市新增",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "title",
+							"value": "濮阳",
+							"type": "text"
+						},
+						{
+							"key": "pid",
+							"value": "100",
+							"type": "text"
+						},
+						{
+							"key": "weight",
+							"value": "10",
+							"type": "text"
+						},
+						{
+							"key": "token",
+							"value": "c00e1c5967d37aeb97099f3586f52770",
+							"type": "text"
+						},
+						{
+							"key": "code",
+							"value": "7914",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://huiminschool.dev.com:8088/api/area/add",
+					"protocol": "http",
+					"host": [
+						"huiminschool",
+						"dev",
+						"com"
+					],
+					"port": "8088",
+					"path": [
+						"api",
+						"area",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "城市修改",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "c00e1c5967d37aeb97099f3586f52770",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "title",
+							"value": "扶沟",
+							"type": "text"
+						},
+						{
+							"key": "pid",
+							"value": "100",
+							"type": "text"
+						},
+						{
+							"key": "weight",
+							"value": "10",
+							"type": "text"
+						},
+						{
+							"key": "id",
+							"value": "820004",
+							"type": "text"
+						},
+						{
+							"key": "code",
+							"value": "7513",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://huiminschool.dev.com:8088/api/area/edit",
+					"protocol": "http",
+					"host": [
+						"huiminschool",
+						"dev",
+						"com"
+					],
+					"port": "8088",
+					"path": [
+						"api",
+						"area",
+						"edit"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -4,17 +4,11 @@
 // | Copyright (c) 2021 慧敏职业学校.
 // +----------------------------------------------------------------------
 // +----------------------------------------------------------------------
-namespace app\api\controller;
-use think\cache\driver\Redis;
-use think\Controller;
-use think\Db;
-use think\Session;
+namespace app\api\controller\v0;
 use app\api\controller\Base;
 use app\api\model\User as UserModel;
 /**
  * 用户控制器
- *
- *
  */
 class User extends Base{
 
@@ -27,12 +21,12 @@ class User extends Base{
      * "sex"=>"1", #1 男  2女
      * "nickname"=>"昵称",
      * 请求方式 post
-     * 请求URL：http://huiminschool.dev.com:8088/api/user/add
+     * 请求URL：http://huiminschool.dev.com:8088/v0/api/user/add
      *
      */
 	public function add(){
 
-        $data= ['code'=>0,'data'=>[],'msg'=>''];
+        $data= ['code'=>0,'data'=>[],'msg'=>'新增成功'];
 	    $addAry = input("post.");
         $others = [
             "token"=>"",
@@ -63,12 +57,12 @@ class User extends Base{
      * "password"=>"密码",
      *  从新登陆token 会发生改变
      * 请求方式 post
-     * 请求URL：http://huiminschool.dev.com:8088/api/user/login
+     * 请求URL：http://huiminschool.dev.com:8088/v0/api/user/login
      *
      */
     public function login()
     {
-        $data= ['code'=>0,'data'=>[],'msg'=>''];
+        $data= ['code'=>0,'data'=>[],'msg'=>'登录成'];
         $username = trim(input('post.username'));
         $password = trim(input('post.password'));
         $password = md5($password);
@@ -98,11 +92,11 @@ class User extends Base{
      * 根据用户ID，获取用户详情
      * 请求方式 GET
      * 参数 uid 用户ID
-     * 路径：http://huiminschool.dev.com:8088/api/user/detail?uid=3
+     * 路径：http://huiminschool.dev.com:8088/v0/api/user/detail?uid=3
 
      */
     public function detail(){
-        $data= ['code'=>0,'data'=>[],'msg'=>''];
+        $data= ['code'=>0,'data'=>[],'msg'=>'查询成功'];
         $uid= intval(input('get.uid'));
         if($uid<1){
             $data['code'] = '10003';
@@ -122,10 +116,10 @@ class User extends Base{
      * 根据用户token 获取用户信息
      * 参数 token 用户token
      * 请求方式 GET
-     * http://huiminschool.dev.com:8088/api/user/getInfoByToken?token=32wweewewwe
+     * http://huiminschool.dev.com:8088/v0/api/user/getInfoByToken?token=32wweewewwe
      */
     public function getInfoByToken(){
-        $data= [];
+        $data= ['code'=>0,'data'=>[],'msg'=>'查询成功'];
         $token= input('get.token');
         if(empty($token)){
             $data['code'] = '10004';
@@ -134,9 +128,12 @@ class User extends Base{
         }
         $user= UserModel::where("token",'=',$token)->find();
         if(!empty($user)){
-            $data= $user->toArray();
+            $data['data']= $user->toArray();
         }else {
             //empty
+            $data['code'] = '10005';
+            $data['msg'] = '根据token:'.$token." 没有查询到数据";
+            return  json($data);
         }
 
         return json($data);
